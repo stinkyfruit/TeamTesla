@@ -1,6 +1,6 @@
 # Project Name
 
-> Pithy project description
+Which? the simple mobile app for picking one of each pair or photos or text.  Get input!  See how your judgements match up with those of the crowd!
 
 ## Team
 
@@ -20,15 +20,16 @@
 
 ## Usage
 
-> Some usage instructions
+Make sure that you have a mongo database running.  Try command ```sh mongod```.
+
+Start the server.  From root directory:  ```sh nodemon server.js```.
+
+In your browser, open ```sh root/client/index.html```.
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Node 4.2.x
+- Mongo
 
 ## Development
 
@@ -40,12 +41,10 @@ From within the root directory:
 npm install
 npm install -g cordova
 npm install -g ionic
-npm install ./client  
+npm install ./client
   (if node-sass fails because of your node version, try installing it separately: npm install ./client node-sass)
 bower install ./client
 ```
-Make sure that you have a mongo database running.  Try command ```mongod```
-
 
 ### Roadmap
 
