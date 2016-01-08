@@ -1,6 +1,6 @@
 # Project Name
 
-Which? the simple mobile app for picking one of each pair or photos or text.  Get input!  See how your judgements match up with those of the crowd!
+Which? the simple <i>mobile</i> app for picking one of each pair or photos or text.  Get input!  See how your judgements match up with those of the crowd!
 
 ## Team
 
@@ -19,6 +19,8 @@ Which? the simple mobile app for picking one of each pair or photos or text.  Ge
 1. [Contributing](#contributing)
 
 ## Usage
+
+Clone the repo.
 
 Make sure that you have a mongo database running.  Try command ```sh mongod```.
 
@@ -48,7 +50,7 @@ bower install ./client
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+View the project roadmap at https://waffle.io/HRR-TeamTesla/TeamTesla.
 
 
 ## Contributing
