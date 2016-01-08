@@ -24,9 +24,9 @@ Clone the repo.
 
 Make sure that you have a mongo database running.  Try command ```mongod```.
 
-Start the server.  From root directory:  ```nodemon server.js```.
+Start the server.  From root directory:  ```nodemon server/server.js```.
 
-In your browser, open ```root/client/index.html```.
+In your browser, open ```root/client/www/index.html```.
 
 ## Requirements
 
