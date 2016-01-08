@@ -1,4 +1,4 @@
-# Project Name
+# Which?
 
 Which? the simple <i>mobile</i> app for picking one of each pair or photos or text.  Get input!  See how your judgements match up with those of the crowd!
 
