@@ -2,6 +2,8 @@ angular.module('which', ['ionic', 'which.controllers', 'which.factory', 'ionic.c
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
+
+
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -46,6 +48,17 @@ angular.module('which', ['ionic', 'which.controllers', 'which.factory', 'ionic.c
   })
 
   //State for creating a Which.
+  .state('app.tagView', {
+    url: '/tagView',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/tagView.html',
+        controller: 'TagViewCtrl'
+      }
+    }
+  })
+
+  //State for viewing the Whiches of a tag
   .state('app.create', {
     url: '/create',
     views: {

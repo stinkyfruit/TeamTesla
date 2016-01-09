@@ -1,18 +1,34 @@
 <ion-view view-title="Create">
   <ion-content>
-    <!--     <label for = "mediatype">Media</label>
 
-    <select class= "input-label" name="mediatype">
-    <option value="image">Image</option>
-    <option value="text">Text</option>
-    </select> -->
     <select ng-options="item as item.label for item in items track by item.id" ng-model="mediaType"></select>
-    <input ng-model="question" type="text" placeholder="your question">
-      <input ng-model="thingA">
-      <h1>or</h1>
-      <input ng-model="thingB">
-    </div>
 
-    <ion-button class="button button-assertive" ng-click="submit(mediaType, question, thingA, thingB)">Submit Which!</ion-button>
+    <label class="item item-input">
+
+    <input ng-model="question" type="text" placeholder="your question">
+
+    </label>
+
+    <label class="item item-input">
+
+    <input type="text" ng-model="thingA" placeholder="A">
+
+    </label>
+
+    <h1 class="bar-stable ">or</h1>
+
+    <label class="item item-input">
+
+    <input type="text" ng-model="thingB" placeholder="B">
+
+    </label>
+
+    <label class="item item-input">
+
+    <input ng-model="tags" type="text" placeholder="tags">
+
+    </label>
+
+    <ion-button class="button button-assertive" ng-click="submit(mediaType, question, thingA, thingB, tags)">Submit Which!</ion-button>
   </ion-content>
 </ion-view>
