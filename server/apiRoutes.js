@@ -1,4 +1,5 @@
 var whichController = require('./which/whichController.js');
+var userController = require('./user/userController.js');
 
 module.exports = function (apiRouter) {
 
@@ -7,18 +8,28 @@ module.exports = function (apiRouter) {
        See documentation at corresponding
        function in whichController.js
   */
-  apiRouter.get('/which', whichController.getNewestWhich);
+  apiRouter.get( '/which', whichController.getNewestWhich);
+
   apiRouter.post('/which', whichController.createWhich);
   apiRouter.post('/which/:whichID/judge', whichController.judgeWhich);
   apiRouter.post('/which/:whichID/tag',   whichController.tagWhich);
-
-
-
   // TODO: implement getting which by id
   // apiRouter.get('/which/:whichID', function () {});
 
 
-  apiRouter.get('/tag/:tagName', whichController.getWhichesByTag);
+  apiRouter.get('/tag/:tagName',        whichController.getWhichesByTag);
+  apiRouter.get('/tag/:tagName/newest', whichController.getNewestWhichByTag);
+
+
+
+  /*     Routes beginning with /api/user
+
+       See documentation at corresponding
+       function in userController.js
+  */
+  apiRouter.post( '/user/signup', userController.createUser);
+  apiRouter.post( '/user/login', userController.authenticate);
+
 
 
 
