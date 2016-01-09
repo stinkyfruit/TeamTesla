@@ -24,9 +24,13 @@ Clone the repo.
 
 Make sure that you have a mongo database running.  Try command ```mongod```.
 
-Start the server.  From root directory:  ```nodemon server/server.js```.
+Start the back end server.  From root directory:  ```nodemon server/server.js```.
 
-In your browser, open ```root/client/www/index.html```.
+Use ionic to serve the front end.  From the root directory:
+```sh
+cd client
+ionic serve
+```
 
 ## Requirements
 
