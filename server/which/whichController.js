@@ -1,5 +1,12 @@
 var Which = require('./whichModel.js'),
     Q     = require('q');
+/*
+// TODO: abstract the dbResults -> clientResults
+// property selection process into this function
+var selectClientProps = function () {
+
+};
+*/
 
 module.exports = {
   // TODO: Once users have been implemented,
@@ -19,6 +26,7 @@ module.exports = {
           with the most recent createdAt value
   */
   getNewestWhich : function (req, res, next) {
+    var username = req.query.username;
     var findAllWhich = Q.nbind(Which.find, Which);
     findAllWhich({})
       .then(function(whiches){
@@ -138,6 +146,39 @@ module.exports = {
         if (err) throw err;
         else {
           res.json(dbResults);
+        }
+      });
+  },
+
+
+  /*        Route Handler - GET /api/tag/:tagName/newest
+
+        * Expects no incoming data
+        * Responds with JSON containing the most recently
+          created Which whose tags array contains tagName
+  */
+  getNewestWhichByTag : function (req, res, next) {
+    console.log('cool');
+    var tag = req.body.tagName;
+    // TODO: refactor out the reduce below and let Mongo find newest
+    Which.find({tags: tag})
+      .exec(function(err, dbResults){
+        if (err) throw err;
+        else if (!dbResults.length) res.json(dbResults);
+        else {
+          var newestWhich = dbResults.reduce(function(memo, curWhich){
+            if ( memo.createdAt < curWhich.createdAt ) return curWhich;
+            else return memo;
+          });
+
+          var clientResults = {
+            id: newestWhich._id,
+            question: newestWhich.question,
+            tags: newestWhich.tags,
+            thingA: newestWhich.thingA,
+            thingB: newestWhich.thingB
+          }
+          res.json(clientResults);
         }
       });
   }
