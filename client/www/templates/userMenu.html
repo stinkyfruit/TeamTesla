@@ -1,0 +1,28 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Menu</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="modal.hide()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+      <div class="list">
+        <label class="item">
+          <button class="button button-block button-positive" ng-click="login()">
+            Log in</button>
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive">
+            Your Whiches</button>
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" ng-click="browseTags()">
+            Browse tags</button>
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive">
+            Log Out</button>
+        </label>
+      </div>
+  </ion-content>
+</ion-modal-view>

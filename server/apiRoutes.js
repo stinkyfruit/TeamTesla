@@ -46,4 +46,3 @@ module.exports = function (apiRouter) {
     req.body.whichID = whichID;
     next();
   });
-};
