@@ -1,8 +1,14 @@
-angular.module('which', ['ionic', 'which.controllers', 'which.factory', 'ionic.contrib.ui.tinderCards'])
+angular.module('which', ['ionic', 'which.controllers', 'which.factory', 'ionic.contrib.ui.tinderCards','user.factory'])
 
-.run(function($ionicPlatform) {
+.run(function($rootScope,$ionicPlatform,User,$state) {
   $ionicPlatform.ready(function() {
 
+    //$rootScope.$on('$stateChangeStart',function(event,toState){
+    //  if(!User.isloggedIn() && toState.name !=='login') {
+    //    event.preventDefault()
+    //    $state.go('app.login')
+    //  }
+    //})
 
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -91,6 +97,18 @@ angular.module('which', ['ionic', 'which.controllers', 'which.factory', 'ionic.c
       'menuContent': {
         templateUrl: 'templates/result.html',
         controller: 'ResultCtrl'
+      }
+    }
+  })
+
+  //State for user login
+
+  .state('app.login', {
+    url: '/tagView',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/login.html',
+        controller: 'LoginCtrl'
       }
     }
   });

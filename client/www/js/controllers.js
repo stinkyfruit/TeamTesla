@@ -41,6 +41,11 @@ angular.module('which.controllers', ['which.factory', 'ionic.contrib.ui.tinderCa
     $state.go('app.create');
   }
 
+  $scope.login = function() {
+    $state.go('app.login');
+    $scope.modal.hide();
+  }
+
 })
 
 .controller('WhichCtrl', function($scope, $state, $stateParams, WhichFactory) {
@@ -140,6 +145,8 @@ angular.module('which.controllers', ['which.factory', 'ionic.contrib.ui.tinderCa
 
     WhichFactory.submit(which);
 
+    $scope.mediaType='',$scope.question='',$scope.thingA='',$scope.thingB='',$scope.tags=''
+
     //Landing page after submission
     $state.go('app.afterCreate');
   }
@@ -183,4 +190,20 @@ angular.module('which.controllers', ['which.factory', 'ionic.contrib.ui.tinderCa
       $state.go('app.which', which);
     })
   }
+})
+
+.controller('LoginCtrl', function($scope,$ionicHistory,$state,User) {
+
+  $scope.loginData = {
+    username : '',
+    password: ''
+  }
+
+  $scope.login = function(){
+    User.login($scope.loginData )
+    $ionicHistory.nextViewOptions({historyRoot : true})
+    $state.go('app.tagView')
+
+  }
+
 });

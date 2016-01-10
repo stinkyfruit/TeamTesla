@@ -5,6 +5,10 @@ angular.module('which.factory', [])
 
 .factory('WhichFactory', function($http) {
 
+  var token = 'someRandomString';
+
+  $http.defaults.headers.common.Authorization = 'Bearer' + token;
+
   var serverURI = 'http://localhost:5007';
 
   /*
