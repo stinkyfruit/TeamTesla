@@ -2,8 +2,9 @@ var Which    = require('./whichModel.js'),
     bluebird = require('bluebird'),
     util     = require('../helpers/util.js');
 
-var selectProperties = util.selectProperties;
-var defaultWhichProps = util.defaultWhichProperties;
+var selectProperties       = util.selectProperties;
+var defaultWhichProps      = util.defaultWhichProperties;
+var buildDefaultWhichQuery = util.buildDefaultWhichQuery;
 
 module.exports = {
 
@@ -11,28 +12,24 @@ module.exports = {
 
   /*        Route Handler - GET /api/which
 
-        * Expects an username parameter in the query string.
-          Optional query parameters:
+        * Expects an userID parameter in the query string.
+            Optional query parameters:
 
-             Parameter       Value         Description
-               resultLimit     [number]      number of results to return. Default: 1
-               createdBy       [userID]
+               Parameter       Value         Description
+                 resultLimit     [number]      Number of results to return. 
+                                               Default value: 1
+                 createdBy       [userID]      Only return Whiches created by this user. 
+                                               Default: not used in query unless specified
 
-        * Default response is the oldest Which, not yet judged by the
-          user. Optional query parameters change the results accordingly
+        * Responds with the oldest Which, not created by userID, not 
+          yet judged by userID. Optional query parameters change results accordingly.
 
   */
-  getWhiches : function (req, res, next) {
-    var userID       =        req.query.userID;
-    var createdBy    =        req.query.createdBy;
+  getWhich : function (req, res, next) {
+    var dbQuery = buildDefaultWhichQuery(req);
     var resultLimit  = Number(req.query.resultLimit) || 1;
 
-    var query = {};
-
-    if (createdBy) query.createdBy = createdBy;
-    query.votesFrom = {$ne: userID}; // exclude already judged Whiches
-
-    Which.find(query)
+    Which.find(dbQuery)
       .sort({createdAt:1}) // oldest first
       .limit(resultLimit)
       .then(function(dbResults){
@@ -66,20 +63,26 @@ module.exports = {
   /*        Route Handler - GET /api/tag/:tagName
 
         * Expects an userID parameter in the query string.
-        * Responds with an array of Whiches that contain
-          tagName in their tags array
+            Optional query parameters:
+
+               Parameter       Value         Description
+                 resultLimit     [number]      Number of results to return. 
+                                               Default value: 1
+                 createdBy       [userID]      Only return Whiches created by this user. 
+                                               Default: not used in query unless specified
+
+        * Responds with the oldest Which, not created by userID, not 
+          yet judged by userID, and whose tags array contains tagName.
+          Optional query parameters change results accordingly.
   */
-  getWhichesByTag : function (req, res, next) {
-    var tag = req.body.tagName;
-
-    var userID      =        req.query.userID;
+  getWhichByTag : function (req, res, next) {
+    var dbQuery = buildDefaultWhichQuery(req);
     var resultLimit = Number(req.query.resultLimit) || 1;
+    
+    dbQuery.tags = req.body.tagName;
 
-    var query = {};
-    query.votesFrom = {$ne: userID}; // exclude already judged Whiches
-    query.tags = tag;
-
-    Which.find(query)
+    Which.find(dbQuery)
+      .limit(resultLimit)
       .sort({createdAt:1}) // oldest first
       .then(function(dbResults){
         res.json( defaultWhichProps(dbResults) );
@@ -93,21 +96,23 @@ module.exports = {
   /*        Route Handler - GET /api/tag/:tagName/newest
 
         * Expects an userID parameter in the query string.
-          Optional query parameters:
-            Parameter       Value         Description
-              resultLimit     [number]      number of results to return. Default: 1
-        * Responds with the most recently created Which whose
-          tags array contains tagName
+            Optional query parameters:
+
+               Parameter       Value         Description
+                 resultLimit     [number]      Number of results to return. 
+                                               Default value: 1
+                 createdBy       [userID]      Only return Whiches created by this user. 
+                                               Default: not used in query unless specified
+
+        * Responds with the newest Which, not created by userID, not 
+          yet judged by userID, and whose tags array contains tagName.
+          Optional query parameters change results accordingly.
   */
   getNewestWhichByTag : function (req, res, next) {
-    var tag = req.body.tagName;
-
-    var userID       =        req.query.userID;
-    var resultLimit  = Number(req.query.resultLimit) || 1;
-
-    var query = {};
-    query.votesFrom = {$ne: userID}; // exclude already judged Whiches
-    query.tags = tag;
+    var dbQuery = buildDefaultWhichQuery(req);
+    var resultLimit = Number(req.query.resultLimit) || 1;
+    
+    dbQuery.tags = req.body.tagName;
 
     Which.find(query)
       .limit(resultLimit)
