@@ -14,9 +14,6 @@ module.exports = function (apiRouter) {
   apiRouter.post('/which',                whichController.createWhich);
   apiRouter.post('/which/:whichID/judge', whichController.judgeWhich);
   apiRouter.post('/which/:whichID/tag',   whichController.tagWhich);
-  // TODO: implement getting which by id
-  // apiRouter.get('/which/:whichID', function () {});
-
 
   apiRouter.get('/tag/:tagName',        whichController.getWhichesByTag);
   apiRouter.get('/tag/:tagName/newest', whichController.getNewestWhichByTag);
