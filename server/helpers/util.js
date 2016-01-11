@@ -52,11 +52,32 @@ var defaultWhichProperties = function (dbResults) {
   return selectProperties(dbResults, defaultProps);
 };
 
+var buildDefaultWhichQuery = function (req) {
+  var query = {};
 
+  var userID       =        req.query.userID;
+  var createdBy    =        req.query.createdBy;
+  var resultLimit  = Number(req.query.resultLimit) || 1;
+  
+  if (userID || createdBy) {
+    query.createdBy = {};
+    if (userID)    query.createdBy['$ne'] = userID; // exclude the user's own Whiches
+    if (createdBy) query.createdBy['$eq'] = createdBy; // only include Whiches created this user id
+  }
+  query.votesFrom = {$ne: userID}; // exclude already judged Whiches
+
+  return query;
+};
 
 
 
 module.exports = {
   selectProperties  : selectProperties,
+<<<<<<< HEAD
   defaultWhichProperties : defaultWhichProperties
 };
+=======
+  defaultWhichProperties : defaultWhichProperties,
+  buildDefaultWhichQuery : buildDefaultWhichQuery
+};
+>>>>>>> refs/remotes/origin/master
