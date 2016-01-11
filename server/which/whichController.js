@@ -16,21 +16,21 @@ module.exports = {
 
              Parameter       Value         Description
                resultLimit     [number]      number of results to return. Default: 1
-               createdBy       [username]
+               createdBy       [userID]
 
         * Default response is the oldest Which, not yet judged by the
           user. Optional query parameters change the results accordingly
 
   */
   getWhiches : function (req, res, next) {
-    var username     =        req.query.username;
+    var userID       =        req.query.userID;
     var createdBy    =        req.query.createdBy;
     var resultLimit  = Number(req.query.resultLimit) || 1;
 
     var query = {};
 
-    if (createdBy)  query.createdBy = createdBy;
-    query.votesFrom = {$ne: username}; // exclude already judged Whiches
+    if (createdBy) query.createdBy = createdBy;
+    query.votesFrom = {$ne: userID}; // exclude already judged Whiches
 
     Which.find(query)
       .sort({createdAt:1}) // oldest first
@@ -65,18 +65,18 @@ module.exports = {
 
   /*        Route Handler - GET /api/tag/:tagName
 
-        * Expects an username parameter in the query string.
+        * Expects an userID parameter in the query string.
         * Responds with an array of Whiches that contain
           tagName in their tags array
   */
   getWhichesByTag : function (req, res, next) {
     var tag = req.body.tagName;
 
-    var username = req.query.username;
-    var resultLimit  = Number(req.query.resultLimit) || 1;
+    var userID      =        req.query.userID;
+    var resultLimit = Number(req.query.resultLimit) || 1;
 
     var query = {};
-    query.votesFrom = {$ne: username}; // exclude already judged Whiches
+    query.votesFrom = {$ne: userID}; // exclude already judged Whiches
     query.tags = tag;
 
     Which.find(query)
@@ -92,7 +92,7 @@ module.exports = {
 
   /*        Route Handler - GET /api/tag/:tagName/newest
 
-        * Expects an username parameter in the query string.
+        * Expects an userID parameter in the query string.
           Optional query parameters:
             Parameter       Value         Description
               resultLimit     [number]      number of results to return. Default: 1
@@ -102,11 +102,11 @@ module.exports = {
   getNewestWhichByTag : function (req, res, next) {
     var tag = req.body.tagName;
 
-    var username     =        req.query.username;
+    var userID       =        req.query.userID;
     var resultLimit  = Number(req.query.resultLimit) || 1;
 
     var query = {};
-    query.votesFrom = {$ne: username}; // exclude already judged Whiches
+    query.votesFrom = {$ne: userID}; // exclude already judged Whiches
     query.tags = tag;
 
     Which.find(query)
@@ -135,7 +135,7 @@ module.exports = {
 
     var newWhich = {
       question: data.question,
-      createdBy: data.createdBy, // username
+      createdBy: data.createdBy, // userID
       tags: data.tags,
       type : data.type,
       thingA : data.thingA, // either string of text, or url to resource
@@ -154,7 +154,7 @@ module.exports = {
 
   /*        Route Handler - POST /api/which/:id/judge
 
-        * Expects an object with the properties username
+        * Expects an object with the properties userID
           and choice. Expects choice to be the string 'A' or 'B'
         * If successful, responds with JSON containing
           the current vote counts for both Which choices.
@@ -163,13 +163,13 @@ module.exports = {
   judgeWhich : function (req, res, next) {
     var whichID  = req.body.whichID;
     var choice   = req.body.choice.toUpperCase();
-    var username = req.body.username;
+    var userID   = req.body.userID;
 
     // Find one Which by ID, but only if the user has not previously judged it
-    var query = {_id: whichID, votesFrom: {$ne: username} };
+    var query = {_id: whichID, votesFrom: {$ne: userID} };
 
     // If found, increment appropriate VoteCount property, and push user to votesFrom
-    var updateCommand = { $inc: {}, $push: {votesFrom: username} };
+    var updateCommand = { $inc: {}, $push: {votesFrom: userID} };
     updateCommand.$inc['thing'+ choice + 'VoteCount'] = 1;
 
     Which.findOneAndUpdate(query, updateCommand, {new:true}) // include updated values in dbResults

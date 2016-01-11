@@ -175,9 +175,9 @@ describe('GET routes', function() {
         });
     });    
 
-    it('If ?username= is provided, should only return Whiches the user has not yet judged', function(done){
+    it('If ?userID= is provided, should only return Whiches the user has not yet judged', function(done){
       request(server.app)
-        .get('/api/which?username=Brendan')
+        .get('/api/which?userID=Brendan')
         .end(function(err, serverResponse){
           if (err) throw err;
           var results = serverResponse.body;
