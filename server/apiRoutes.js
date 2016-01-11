@@ -8,14 +8,14 @@ module.exports = function (apiRouter) {
        See documentation at corresponding
        function in whichController.js
   */
-  apiRouter.get( '/which',          whichController.getWhiches);
+  apiRouter.get( '/which',          whichController.getWhich);
   apiRouter.get( '/which/:whichID', whichController.getWhichById);
 
   apiRouter.post('/which',                whichController.createWhich);
   apiRouter.post('/which/:whichID/judge', whichController.judgeWhich);
   apiRouter.post('/which/:whichID/tag',   whichController.tagWhich);
 
-  apiRouter.get('/tag/:tagName',        whichController.getWhichesByTag);
+  apiRouter.get('/tag/:tagName',        whichController.getWhichByTag);
   apiRouter.get('/tag/:tagName/newest', whichController.getNewestWhichByTag);
 
 
