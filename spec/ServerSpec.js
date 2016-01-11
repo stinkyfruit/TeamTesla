@@ -174,8 +174,19 @@ describe('GET routes', function() {
           done();
         });
     });    
+    
+    it('If ?userID= is provided, should not return Whiches created by the specified user', function(done){
+      request(server.app)
+        .get('/api/which?userID=J4XmZ8uV')
+        .end(function(err, serverResponse){
+          if (err) throw err;
+          var results = serverResponse.body;
+          expect( results[0].createdBy ).to.not.equal('J4XmZ8uV');
+          done();
+        });
+    });
 
-    it('If ?userID= is provided, should only return Whiches the user has not yet judged', function(done){
+    it('If ?userID= is provided, should only return Whiches the specified user has not yet judged', function(done){
       request(server.app)
         .get('/api/which?userID=Brendan')
         .end(function(err, serverResponse){
