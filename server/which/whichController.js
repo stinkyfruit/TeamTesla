@@ -161,7 +161,7 @@ module.exports = {
 
         * Expects an object with the properties userID
           and choice. Expects choice to be the string 'A' or 'B'
-        * If successful, responds with JSON containing
+        * If successful, responds with an object containing
           the current vote counts for both Which choices.
           Sends 409 if the ID is invalid, or the user already judged
   */
@@ -198,9 +198,8 @@ module.exports = {
 
         * Expects an object with a property tag.
           Expects tag to be a string that does not contain spaces.
-        * Responds with a JSON object containing a tagNames
-          property. tagNames is an array containing all tags
-          the Which currently has
+        * Responds with an object containing a tagNames property. 
+          tagNames is an array containing all tags the Which currently has.
   */
   tagWhich : function (req, res, next) {
     var whichID  = req.body.whichID;
