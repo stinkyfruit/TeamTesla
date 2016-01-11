@@ -19,10 +19,7 @@ angular.module('which.factory', [])
   var choose = function(choice, id, username) {
     //choice === a || b
     var uri = serverURI + '/api/which/' + id + '/judge';
-    // return {
-    //   a: 1,
-    //   b: 1
-    // }
+
     return $http.post(uri, {
         username: username,
         choice: choice
