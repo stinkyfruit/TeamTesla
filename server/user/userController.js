@@ -21,16 +21,15 @@ module.exports = {
       .then(function(dbResults){
         if (dbResults) res.sendStatus(409); // signup failed: user already exists
         else {
-          var newUser = User(user);
-          newUser.save(function(err){
-            if (err) throw err;
-            else res.sendStatus(201); // signup successful: created
-          });
+          User(user).save()
+            .then(function(createdUser){
+              res.status(201).json( {id: createdUser._id} ); // signup successful: created
+            })
+            .catch(function(err){
+              throw err;
+            });
         }
       })
-      .catch(function(err){
-        throw err;
-      });
   },
 
 
@@ -48,7 +47,7 @@ module.exports = {
     User.findOne({username: username, password: password})
       .then(function(dbResults){
         if (!dbResults) res.sendStatus(401); // unauthorized: invalid credentials
-        else res.sendStatus(200); // login successful
+        else res.status(200).json( {id: dbResults._id} ); // login successful
       })
       .catch(function(err){
         throw err;

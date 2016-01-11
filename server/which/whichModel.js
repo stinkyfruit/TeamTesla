@@ -6,7 +6,7 @@ var WhichSchema = new mongoose.Schema({
   createdBy: {type: String, default: 'Anonymous'}, // username
   votesFrom: Array,
   tags: Array,
-  type : {type: String, default: 'string'},
+  type : {type: String, default: 'text'},
   thingA : {type: String, default: ''}, // either string of text, or url to resource
   thingB : {type: String, default: ''},
   thingAVoteCount : {type: Number, default: 0},
