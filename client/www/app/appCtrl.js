@@ -20,43 +20,22 @@ angular.module('which.controllers.app', ['which.factory','ionic','ionic.contrib.
       User.signOut();
     };
 
-    // Triggered in the login modal to close it
-    // $scope.closeLogin = function() {
-    //   $scope.modal.hide();
-    // };
-
-    // Open the login modal
-    // $scope.login = function() {
-    //   $scope.modal.show();
-    // };
-
-    // Perform the login action when the user submits the login form
-    // $scope.doLogin = function() {
-    //   console.log('Doing login', $scope.loginData);
-
-    //   // Simulate a login delay. Remove this and replace with your login
-    //   // code if using a login system
-    //   $timeout(function() {
-    //     $scope.closeLogin();
-    //   }, 1000);
-    // };
-
     $scope.browseTags = function() {
       $state.go('app.tagView');
       $scope.modal.hide();
-    }
+    };
 
     $scope.create = function() {
       $state.go('app.create');
-    }
+    };
 
     $scope.login = function() {
       $state.go('app.login');
       $scope.modal.hide();
-    }
+    };
 
     $scope.signUp = function() {
       $state.go('app.signUp');
       $scope.modal.hide();
-    }
+    };
   })
