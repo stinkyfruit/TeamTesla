@@ -8,9 +8,10 @@ module.exports = function (apiRouter) {
        See documentation at corresponding
        function in whichController.js
   */
-  apiRouter.get( '/which', whichController.getNewestWhich);
+  apiRouter.get( '/which',          whichController.getWhiches);
+  apiRouter.get( '/which/:whichID', whichController.getWhichById);
 
-  apiRouter.post('/which', whichController.createWhich);
+  apiRouter.post('/which',                whichController.createWhich);
   apiRouter.post('/which/:whichID/judge', whichController.judgeWhich);
   apiRouter.post('/which/:whichID/tag',   whichController.tagWhich);
   // TODO: implement getting which by id
@@ -31,8 +32,6 @@ module.exports = function (apiRouter) {
   apiRouter.post( '/user/login', userController.authenticate);
 
 
-
-
   /*   For all dynamic routes containing a :whichID or :tagName,
        before passing the request along to its handler
        create a property on req.body of the same name,
@@ -45,4 +44,5 @@ module.exports = function (apiRouter) {
   apiRouter.param('whichID', function(req, res, next, whichID){
     req.body.whichID = whichID;
     next();
-  });
+  });  
+};
