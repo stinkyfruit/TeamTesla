@@ -17,10 +17,9 @@ angular.module('user.factory', [])
 
   var login = function(credentials) {
     $http.post(apiUrl + '/api/user/login', credentials).then(function(response) {
-      console.log(response)
       if (response.data.id !== undefined) {
         loggedIn = true;
-        window.localStorage['which.userToken'] = response.data._id;
+        window.localStorage.setItem('which.userToken', response.data.id);
         $ionicHistory.nextViewOptions({
           historyRoot: true
         })
@@ -30,7 +29,7 @@ angular.module('user.factory', [])
   };
 
   var isloggedIn = function() {
-    return loggedIn
+    return loggedIn;
   }
 
 
@@ -42,11 +41,11 @@ angular.module('user.factory', [])
     $http.post(apiUrl + '/api/user/signup', credentials).then(function(response) {
       if (response.data.id !== undefined) {
         loggedIn = true;
-        window.localStorage['which.userToken'] = response.data._id;
+        window.localStorage['which.userToken'] = response.data.id;
         $ionicHistory.nextViewOptions({
           historyRoot: true
         });
-        $state.go('app.which');
+        $state.go('app.tagView');
       }
     })
   };

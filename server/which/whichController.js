@@ -12,14 +12,14 @@ module.exports = {
   /*        Route Handler - GET /api/which
 
         * Expects an username parameter in the query string.
-          Optional query parameters: 
+          Optional query parameters:
 
              Parameter       Value         Description
                resultLimit     [number]      number of results to return. Default: 1
-               createdBy       [username] 
+               createdBy       [username]
 
         * Default response is the oldest Which, not yet judged by the
-          user. Optional query parameters change the results accordingly 
+          user. Optional query parameters change the results accordingly
 
   */
   getWhiches : function (req, res, next) {
@@ -28,10 +28,10 @@ module.exports = {
     var resultLimit  = Number(req.query.resultLimit) || 1;
 
     var query = {};
-    
+
     if (createdBy)  query.createdBy = createdBy;
     query.votesFrom = {$ne: username}; // exclude already judged Whiches
-         
+
     Which.find(query)
       .sort({createdAt:1}) // oldest first
       .limit(resultLimit)
@@ -41,7 +41,7 @@ module.exports = {
       .catch(function(err){
         throw err;
       });
-      
+
   },
 
 
@@ -52,7 +52,7 @@ module.exports = {
   */
   getWhichById : function (req, res, next) {
     var whichID  = req.body.whichID;
-         
+
     Which.findOne({_id: whichID})
       .then(function(dbResults){
         res.json( defaultWhichProps(dbResults) );
@@ -66,13 +66,14 @@ module.exports = {
   /*        Route Handler - GET /api/tag/:tagName
 
         * Expects an username parameter in the query string.
-        * Responds with an array of Whiches that contain 
+        * Responds with an array of Whiches that contain
           tagName in their tags array
   */
   getWhichesByTag : function (req, res, next) {
     var tag = req.body.tagName;
 
     var username = req.query.username;
+    var resultLimit  = Number(req.query.resultLimit) || 1;
 
     var query = {};
     query.votesFrom = {$ne: username}; // exclude already judged Whiches
@@ -92,7 +93,7 @@ module.exports = {
   /*        Route Handler - GET /api/tag/:tagName/newest
 
         * Expects an username parameter in the query string.
-          Optional query parameters: 
+          Optional query parameters:
             Parameter       Value         Description
               resultLimit     [number]      number of results to return. Default: 1
         * Responds with the most recently created Which whose
@@ -155,7 +156,7 @@ module.exports = {
 
         * Expects an object with the properties username
           and choice. Expects choice to be the string 'A' or 'B'
-        * If successful, responds with JSON containing 
+        * If successful, responds with JSON containing
           the current vote counts for both Which choices.
           Sends 409 if the ID is invalid, or the user already judged
   */
@@ -164,7 +165,7 @@ module.exports = {
     var choice   = req.body.choice.toUpperCase();
     var username = req.body.username;
 
-    // Find one Which by ID, but only if the user has not previously judged it 
+    // Find one Which by ID, but only if the user has not previously judged it
     var query = {_id: whichID, votesFrom: {$ne: username} };
 
     // If found, increment appropriate VoteCount property, and push user to votesFrom

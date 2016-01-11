@@ -21,7 +21,6 @@ module.exports = function (apiRouter) {
 
 
   /*     Routes beginning with /api/user
-
        See documentation at corresponding
        function in userController.js
   */
@@ -41,5 +40,5 @@ module.exports = function (apiRouter) {
   apiRouter.param('whichID', function(req, res, next, whichID){
     req.body.whichID = whichID;
     next();
-  });  
+  });
 };
