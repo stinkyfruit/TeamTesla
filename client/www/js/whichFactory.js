@@ -36,7 +36,11 @@ angular.module('which.factory', [])
    * Sends an HTTP GET request to /api/which
    **/
   var getNew = function() {
-    return $http.get(serverURI + '/api/which')
+    return $http.get(serverURI + '/api/which', {
+        params: {
+          username: window.localStorage.getItem('which.userToken')
+        }
+      })
       .then(function(res) {
         return res.data;
       }, function(err) {
@@ -60,10 +64,15 @@ angular.module('which.factory', [])
 
   /*
    * Gets all the whiches with a certain tag
-   * Sends an HTTP get requesst to /api/tag/{{tag}}
+   * Sends an HTTP get request to /api/tag/{{tag}}?username=myuserid
    **/
   var getWhichesByTag = function(tag) {
-    return $http.get(serverURI + '/api/tag/' + tag)
+    return $http.get(serverURI + '/api/tag/' + tag, {
+        params: {
+          username: window.localStorage.getItem('which.userToken'),
+          resultLimit: 100
+        }
+      })
       .then(function(res) {
         return res.data;
       }, function(err) {
@@ -71,23 +80,43 @@ angular.module('which.factory', [])
       });
   }
 
-    /*
+  /*
    * Gets one which with the specified ID
-   * Sends an HTTP get requesst to ????
+   * Sends an HTTP get request to /api/which/{{id}}
    **/
-  var getWhichByID = function(tag) {
-    // return $http.get(serverURI + '/api/tag/' + tag)
-    //   .then(function(res) {
-    //     return res.data;
-    //   }, function(err) {
-    //     return err;
-    //   });
+  var getWhichByID = function(id) {
+    return $http.get(serverURI + '/api/which/' + id)
+      .then(function(res) {
+        return res.data;
+      }, function(err) {
+        return err;
+      });
+  }
+
+  /*
+   * Gets all of the whiches created by a user
+   * Sends an HTTP get request to /api/which?createdBy={{userid}}&resultLimit={{limit}}
+   **/
+  var getWhichesByUser = function() {
+    return $http.get(serverURI + '/api/which',{
+      params : {
+        createdBy : window.localStorage.getItem('which.userToken'),
+        resultLimit: 100
+      }
+    })
+      .then(function(res) {
+        return res.data;
+      }, function(err) {
+        return err;
+      });
   }
 
   return {
     choose: choose,
     getNew: getNew,
     submit: submit,
-    getWhichesByTag: getWhichesByTag
+    getWhichesByTag: getWhichesByTag,
+    getWhichByID: getWhichByID,
+    getWhichesByUser : getWhichesByUser
   }
 });

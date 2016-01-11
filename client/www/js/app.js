@@ -7,6 +7,8 @@ angular.module('which', ['ionic',
   'which.controllers.tagView',
   'which.controllers.which',
   'which.controllers.signUp',
+  'which.controllers.whichesByUser',
+  'which.controllers.whichInfoCtrl',
   'which.factory',
   'ionic.contrib.ui.tinderCards',
   'user.factory'
@@ -136,7 +138,32 @@ angular.module('which', ['ionic',
         controller: 'signUpCtrl'
       }
     }
-  });
+  })
+
+  //State for all user's whiches
+  .state('app.whichesByUser', {
+    url: '/whichesByUser',
+    views: {
+      'menuContent': {
+        templateUrl: 'whichesByUser/whichesByUser.html',
+        controller: 'WhichesByUserCtrl'
+      }
+    }
+  })
+
+  //State for each which made by user
+    .state('app.whichInfo', {
+      url: '/whichInfo',
+      params: {
+        which: {}
+      },
+      views: {
+        'menuContent': {
+          templateUrl: 'whichInfo/whichInfo.html',
+          controller: 'WhichInfoCtrl'
+        }
+      }
+    });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/login');

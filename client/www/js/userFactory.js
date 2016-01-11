@@ -23,15 +23,10 @@ angular.module('user.factory', [])
         $ionicHistory.nextViewOptions({
           historyRoot: true
         })
-        $state.go('app.tagView')
+        $state.go('app.tagView');
       }
     })
   };
-
-  var isloggedIn = function() {
-    return loggedIn;
-  }
-
 
   /*
    * Sends signUp credentials from submit form to server
@@ -50,6 +45,13 @@ angular.module('user.factory', [])
     })
   };
 
+  /*
+   * Returns login status
+   */
+
+  var isloggedIn = function() {
+    return loggedIn;
+  }
 
   /*
    * Deletes current session on device
