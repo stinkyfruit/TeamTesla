@@ -7,7 +7,7 @@
   </ion-header-bar>
   <ion-content>
       <div class="list">
-        <label class="item">
+        <label class="item" ng-if="notLoggedIn()">
           <button class="button button-block button-positive" ng-click="login()">
             Log in</button>
         </label>
@@ -19,8 +19,12 @@
           <button class="button button-block button-positive" ng-click="browseTags()">
             Browse tags</button>
         </label>
-        <label class="item">
-          <button class="button button-block button-positive">
+        <label class="item" ng-if="notLoggedIn()">
+          <button class="button button-block button-positive" ng-click="signUp()">
+            Sign Up</button>
+        </label>
+        <label class="item" ng-if="!notLoggedIn()">
+          <button class="button button-block button-positive" ng-click="logOut()">
             Log Out</button>
         </label>
       </div>
