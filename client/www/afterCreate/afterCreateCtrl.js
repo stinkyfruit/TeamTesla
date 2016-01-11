@@ -6,12 +6,11 @@ angular.module('which.controllers.afterCreate', ['which.factory', 'ionic.contrib
     //Load newest function after submission of previous which
     $scope.getNewWhich = function() {
       WhichFactory.getNew().then(function(which) {
-
         $state.go('app.which', {
-          id: which.id,
-          question: which.question,
-          thingA: which.thingA,
-          thingB: which.thingB
+          id: which[0].id,
+          question: which[0].question,
+          thingA: which[0].thingA,
+          thingB: which[0].thingB
           //tags: which.tags
         });
       });
@@ -22,4 +21,4 @@ angular.module('which.controllers.afterCreate', ['which.factory', 'ionic.contrib
       $state.go('app.create');
     }
 
-  })
+  });

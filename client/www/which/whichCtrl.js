@@ -4,51 +4,52 @@
 angular.module('which.controllers.which', ['which.factory', 'ionic.contrib.ui.tinderCards'])
 
 
-  .controller('WhichCtrl', function($scope, $state, $stateParams, WhichFactory) {
-    $scope.username = 'Me';
-
-    //Defaults the slider to the second "Image" Where are currently hosting the question
-    $scope.activeSlide = 1;
-
-    //Probably only initially need id, question, thingA, thingB,
-    //Demo object used during development
-    $scope.which = {
+.controller('WhichCtrl', function($scope, $state, $stateParams, WhichFactory) {
+  $scope.data = {
+    username: window.localStorage.getItem('which.userToken'),
+    activeSlide: 1,
+    which: {
       id: $stateParams.id,
       question: $stateParams.question,
       thingA: $stateParams.thingA,
       thingB: $stateParams.thingB
-      //tags: which.tags
+    },
+    cardSrc: ''
+  };
+
+  //TODO: fix this
+  $scope.data.type = ($scope.data.which.thingA.substring(0,4) === 'http')?'image':'text'
+  $scope.data.things = [$scope.data.which.thingA, $scope.data.which.question, $scope.data.which.thingB];
+
+
+  $scope.cardPartialSwipe = function(amt) {
+    var threshold = .15;
+    if (amt < 0 - threshold) {
+      $scope.data.cardSrc = $scope.data.which.thingA;
+    } else if (amt > threshold) {
+      $scope.data.cardSrc = $scope.data.which.thingB;
+    } else {
+      $scope.data.cardSrc = '';
     }
+  };
 
-    console.log($scope.which);
+  //This gets called when the user swipes, making a decision with the choice from the user
+  $scope.decide = function(choice) {
+    WhichFactory.choose(choice, $scope.data.which.id, $scope.data.username).then(function(votingResult) {
+      console.log(votingResult)
 
-    //Slider takes in an array, thus using the sandwich structure to display text between two images
-    $scope.things = [$scope.which.thingA, $scope.which.question, $scope.which.thingB];
-
-
-    $scope.cardSrc = '';
-    $scope.cardPartialSwipe = function(amt) {
-      var threshold = .15;
-      if (amt < 0 - threshold) {
-        $scope.cardSrc = $scope.which.thingA;
-      } else if (amt > threshold) {
-        $scope.cardSrc = $scope.which.thingB;
-      } else {
-        $scope.cardSrc = '';
-      }
-    };
-
-    //This gets called when the user swipes, making a decision with the choice from the user
-    $scope.decide = function(choice) {
-      WhichFactory.choose(choice, $scope.which.id, $scope.username).then(function(votingResult) {
-        console.log(votingResult)
-
-        //Allows for state change, showing new view, second argument is the params being sent in to display results
-        $state.go('app.result', {
-          a: votingResult.votesForA,
-          b: votingResult.votesForB
-        });
+      //Allows for state change, showing new view, second argument is the params being sent in to display results
+      $state.go('app.result', {
+        a: votingResult.votesForA,
+        b: votingResult.votesForB
       });
+    });
 
-    }
-  })
+  }
+
+  $scope.originalData = angular.copy($scope.data);
+
+  $scope.$on('clear', function(event, state) {
+      $scope.data = angular.copy($scope.originalData);
+  });
+})

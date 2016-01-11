@@ -17,7 +17,13 @@ angular.module('which.controllers.tagView', ['which.factory', 'ionic.contrib.ui.
 
   $scope.goToWhich = function(id) {
     WhichFactory.getWhichByID(id).then(function(which) {
-      $state.go('app.which', which);
+      console.log(which);
+      $state.go('app.which', {
+        id: which.id,
+        question: which.question,
+        thingA: which.thingA,
+        thingB: which.thingB
+      });
     })
   }
 

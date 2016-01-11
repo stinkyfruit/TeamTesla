@@ -5,11 +5,13 @@ angular.module('which.controllers.login', ['which.factory', 'ionic.contrib.ui.ti
 
   $scope.data = {
     username: '',
-    password: ''
+    password: '',
+    message: ''
   };
 
   $scope.login = function() {
-    User.login($scope.data)
+    User.login($scope.data);
+    $scope.data.message = 'Incorrect credentials';
   }
 
   $scope.originalData = angular.copy($scope.data);
@@ -18,4 +20,8 @@ angular.module('which.controllers.login', ['which.factory', 'ionic.contrib.ui.ti
     if (state === 'app.login')
       $scope.data = $scope.originalData;
   });
+
+  $scope.goToSignUp = function(){
+    $state.go('app.signUp')
+  }
 });

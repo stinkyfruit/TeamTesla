@@ -2,7 +2,7 @@
 /*
       Get a new object or set of objects with only the
       properties specified.
-      
+
       * Expects:
           dbResults     an object or array of objects.
           props         an object with keys of the desired properties
@@ -10,10 +10,10 @@
                         name of the property on the destination object.
                           {existingPropName : newPropName}
 
-                          e.g. { _id: id } 
+                          e.g. { _id: id }
                         Select only the _id property, and rename it id.
       * Returns:
-          The same number of objects, with only the 
+          The same number of objects, with only the
           properties selected in props array
 */
 
@@ -46,7 +46,8 @@ var defaultWhichProperties = function (dbResults) {
     thingAVoteCount : 'thingAVoteCount',
     thingBVoteCount : 'thingBVoteCount',
     tags : 'tags',
-    votesFrom : 'votesFrom'
+    votesFrom : 'votesFrom',
+    createdAt: 'createdAt'
   };
   return selectProperties(dbResults, defaultProps);
 };
@@ -72,6 +73,11 @@ var buildDefaultWhichQuery = function (req) {
 
 module.exports = {
   selectProperties  : selectProperties,
+<<<<<<< HEAD
+  defaultWhichProperties : defaultWhichProperties
+};
+=======
   defaultWhichProperties : defaultWhichProperties,
   buildDefaultWhichQuery : buildDefaultWhichQuery
 };
+>>>>>>> refs/remotes/origin/master

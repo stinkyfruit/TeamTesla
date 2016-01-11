@@ -11,9 +11,12 @@
           <input type="password" ng-model="data.password">
         </label>
         <label class="item">
+        <h2>{{data.message}}</h2>
           <button class="button button-block button-calm" ng-click="signUp()">Sign Up</button>
         </label>
       </div>
     </form>
+
+    <h6 ng-click="goToLogin()">Already a user?...</h6>
   </ion-content>
 </ion-view>

@@ -38,4 +38,9 @@ angular.module('which.controllers.app', ['which.factory','ionic','ionic.contrib.
       $state.go('app.signUp');
       $scope.modal.hide();
     };
+
+    $scope.myWhiches = function() {
+      $state.go('app.whichesByUser');
+      $scope.modal.hide();
+    }
   })

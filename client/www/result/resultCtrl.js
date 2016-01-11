@@ -14,10 +14,10 @@ angular.module('which.controllers.result', ['which.factory', 'ionic.contrib.ui.t
       WhichFactory.getNew().then(function(which) {
 
         $state.go('app.which', {
-          id: which.id,
-          question: which.question,
-          thingA: which.thingA,
-          thingB: which.thingB
+          id: which[0].id,
+          question: which[0].question,
+          thingA: which[0].thingA,
+          thingB: which[0].thingB
           //tags: which.tags
         });
       });
