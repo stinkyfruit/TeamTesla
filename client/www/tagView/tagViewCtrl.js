@@ -13,7 +13,7 @@ angular.module('which.controllers.tagView', ['which.factory', 'ionic.contrib.ui.
     WhichFactory.getWhichesByTag($scope.data.tagSearch).then(function(whiches) {
       $scope.data.whiches = whiches;
     })
-  }
+  };
 
   $scope.goToWhich = function(id) {
     WhichFactory.getWhichByID(id).then(function(which) {

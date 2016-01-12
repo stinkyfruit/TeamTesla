@@ -73,11 +73,6 @@ var buildDefaultWhichQuery = function (req) {
 
 module.exports = {
   selectProperties  : selectProperties,
-<<<<<<< HEAD
-  defaultWhichProperties : defaultWhichProperties
-};
-=======
   defaultWhichProperties : defaultWhichProperties,
   buildDefaultWhichQuery : buildDefaultWhichQuery
 };
->>>>>>> refs/remotes/origin/master

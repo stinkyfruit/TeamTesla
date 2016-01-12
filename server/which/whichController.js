@@ -16,12 +16,12 @@ module.exports = {
             Optional query parameters:
 
                Parameter       Value         Description
-                 resultLimit     [number]      Number of results to return. 
+                 resultLimit     [number]      Number of results to return.
                                                Default value: 1
-                 createdBy       [userID]      Only return Whiches created by this user. 
+                 createdBy       [userID]      Only return Whiches created by this user.
                                                Default: not used in query unless specified
 
-        * Responds with the oldest Which, not created by userID, not 
+        * Responds with the oldest Which, not created by userID, not
           yet judged by userID. Optional query parameters change results accordingly.
 
   */
@@ -66,19 +66,19 @@ module.exports = {
             Optional query parameters:
 
                Parameter       Value         Description
-                 resultLimit     [number]      Number of results to return. 
+                 resultLimit     [number]      Number of results to return.
                                                Default value: 1
-                 createdBy       [userID]      Only return Whiches created by this user. 
+                 createdBy       [userID]      Only return Whiches created by this user.
                                                Default: not used in query unless specified
 
-        * Responds with the oldest Which, not created by userID, not 
+        * Responds with the oldest Which, not created by userID, not
           yet judged by userID, and whose tags array contains tagName.
           Optional query parameters change results accordingly.
   */
   getWhichByTag : function (req, res, next) {
     var dbQuery = buildDefaultWhichQuery(req);
     var resultLimit = Number(req.query.resultLimit) || 1;
-    
+
     dbQuery.tags = req.body.tagName;
 
     Which.find(dbQuery)
@@ -99,19 +99,19 @@ module.exports = {
             Optional query parameters:
 
                Parameter       Value         Description
-                 resultLimit     [number]      Number of results to return. 
+                 resultLimit     [number]      Number of results to return.
                                                Default value: 1
-                 createdBy       [userID]      Only return Whiches created by this user. 
+                 createdBy       [userID]      Only return Whiches created by this user.
                                                Default: not used in query unless specified
 
-        * Responds with the newest Which, not created by userID, not 
+        * Responds with the newest Which, not created by userID, not
           yet judged by userID, and whose tags array contains tagName.
           Optional query parameters change results accordingly.
   */
   getNewestWhichByTag : function (req, res, next) {
     var dbQuery = buildDefaultWhichQuery(req);
     var resultLimit = Number(req.query.resultLimit) || 1;
-    
+
     dbQuery.tags = req.body.tagName;
 
     Which.find(query)
@@ -198,7 +198,7 @@ module.exports = {
 
         * Expects an object with a property tag.
           Expects tag to be a string that does not contain spaces.
-        * Responds with an object containing a tagNames property. 
+        * Responds with an object containing a tagNames property.
           tagNames is an array containing all tags the Which currently has.
   */
   tagWhich : function (req, res, next) {

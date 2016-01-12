@@ -21,7 +21,7 @@ angular.module('which.factory', [])
     var uri = serverURI + '/api/which/' + id + '/judge';
 
     return $http.post(uri, {
-        username: username,
+        userID: username,
         choice: choice
       })
       .then(function(res) {
@@ -38,7 +38,7 @@ angular.module('which.factory', [])
   var getNew = function() {
     return $http.get(serverURI + '/api/which', {
         params: {
-          username: window.localStorage.getItem('which.userToken')
+          userID: window.localStorage.getItem('which.userToken')
         }
       })
       .then(function(res) {
@@ -69,7 +69,7 @@ angular.module('which.factory', [])
   var getWhichesByTag = function(tag) {
     return $http.get(serverURI + '/api/tag/' + tag, {
         params: {
-          username: window.localStorage.getItem('which.userToken'),
+          userID: window.localStorage.getItem('which.userToken'),
           resultLimit: 100
         }
       })
