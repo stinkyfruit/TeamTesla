@@ -10,15 +10,16 @@ Which? the simple <i>mobile</i> app for picking one of each pair or photos or te
 
 ## Table of Contents
 
-1. [Usage](#Usage)
+1. [Usage: Local](#usage-local)
+1. [Usage: Mobile](#usage-mobile)
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
+    1. [Roadmap](#roadmap)
 1. [Team](#team)
 1. [Contributing](#contributing)
 
-## Usage
+## Usage: Local
 
 Clone the repo.
 
@@ -31,6 +32,18 @@ Use ionic to serve the front end.  From the root directory:
 cd client
 ionic serve
 ```
+
+## Usage: Mobile
+
+Serve the backend from Heroku.
+
+Make a login at https://apps.ionic.io/.
+
+From the command line, go to the root folder of your client app, the folder that has the www folder in it.
+
+```ionic upload --note "Added blue header" --deploy=production``  Fill in your note, and then add your login info when prompted.  You are uploading, and deploying instantly to production.
+
+In your app store, download Ionic View to your phone.  Log in to the Ionic View app with your ionic.io login.  Click your app and click Download (the middle button).  When the app has downloaded to your phone, click View App.
 
 ## Requirements
 
