@@ -41,7 +41,7 @@ Make a login at https://apps.ionic.io/.
 
 From the command line, go to the root folder of your client app, the folder that has the www folder in it.
 
-```ionic upload --note "Added blue header" --deploy=production``  Fill in your note, and then add your login info when prompted.  You are uploading, and deploying instantly to production.
+Run ```ionic io init```, or subsequently, ```ionic upload --note "Added blue header" --deploy=production``  Fill in your note, and then add your login info when prompted.  You are uploading, and deploying instantly to production.
 
 In your app store, download Ionic View to your phone.  Log in to the Ionic View app with your ionic.io login.  Click your app and click Download (the middle button).  When the app has downloaded to your phone, click View App.
 
