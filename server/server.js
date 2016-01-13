@@ -4,8 +4,16 @@ var express  = require('express'),
 
 var app = express();
 var port = process.env.PORT || 5007;
+var databaseLocation = process.env.MONGOLAB_URI || 'mongodb://localhost/testdb';
 
-mongoose.connect('mongodb://localhost/testdb');
+mongoose.connect(databaseLocation, function (err, res) {
+  if (err) {
+  console.log ('ERROR connecting to: ' + databaseLocation + '. ' + err);
+  }
+  else {
+  console.log ('Succeeded connected to: ' + databaseLocation);
+  }
+});
 
 require('./middleware.js')(app, express);
 
