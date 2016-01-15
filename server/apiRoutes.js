@@ -10,6 +10,7 @@ module.exports = function (apiRouter) {
   */
   apiRouter.get( '/which',          whichController.getWhich);
   apiRouter.get( '/which/:whichID', whichController.getWhichById);
+  apiRouter.get( '/which/totalVotes', whichController.getWhichesByVoteCount);
 
   apiRouter.post('/which',                whichController.createWhich);
   apiRouter.post('/which/:whichID/judge', whichController.judgeWhich);

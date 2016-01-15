@@ -1,7 +1,8 @@
 <ion-view view-title="Browse Tags">
   <ion-content>
     <input type="text" ng-model="data.tagSearch" placeholder="Search for tags...">
-    <button class="button button-positive" ng-click="getWhichesByTag()">Search</button>
+    <button class="button button-positive" ng-click="getWhichesByTag()">Search By Tag</button>
+    <button class="button button-positive" ng-click="getWhichesByVoteCount()">Most Popular Whiches</button>
 <ion-list>
   <ion-item ng-repeat="which in data.whiches" ng-click="goToWhich(which.id)">
     {{which.question}}

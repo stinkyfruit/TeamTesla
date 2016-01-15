@@ -78,7 +78,6 @@ module.exports = {
   getWhichByTag : function (req, res, next) {
     var dbQuery = buildDefaultWhichQuery(req);
     var resultLimit = Number(req.query.resultLimit) || 1;
-
     dbQuery.tags = req.body.tagName;
 
     Which.find(dbQuery)
@@ -112,11 +111,24 @@ module.exports = {
     var dbQuery = buildDefaultWhichQuery(req);
     var resultLimit = Number(req.query.resultLimit) || 1;
 
-    dbQuery.tags = req.body.tagName;
-
-    Which.find(query)
+    Which.find(dbQuery)
       .limit(resultLimit)
       .sort({createdAt:-1}) // newest first
+      .then(function(dbResults){
+        res.json( defaultWhichProps(dbResults) );
+      })
+      .catch(function(err){
+        throw err;
+      });
+  },
+
+  getWhichesByVoteCount: function(req, res, next){
+    var dbQuery = buildDefaultWhichQuery(req);
+    var resultLimit = Number(req.query.resultLimit) || 1;
+    
+    Which.find(query)
+      .limit(resultLimit)
+      .sort({thingAVoteCount:1})
       .then(function(dbResults){
         res.json( defaultWhichProps(dbResults) );
       })

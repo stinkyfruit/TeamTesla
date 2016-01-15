@@ -6,13 +6,19 @@ angular.module('which.controllers.tagView', ['which.factory', 'ionic.contrib.ui.
   $scope.data = {
     tagSearch: '',
     tags: []
-
   };
 
   $scope.getWhichesByTag = function() {
     WhichFactory.getWhichesByTag($scope.data.tagSearch).then(function(whiches) {
       $scope.data.whiches = whiches;
-    })
+    });
+  };
+
+  $scope.getWhichesByVoteCount = function(){
+    WhichFactory.getWhichesByVoteCount().then(function(whiches){
+      console.log(whiches);
+      $scope.data.orderedWhiches = whiches;
+    });
   };
 
   $scope.goToWhich = function(id) {
