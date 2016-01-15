@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "ionic-ion-tinder-cards": "ionic-contrib-tinder-cards#*",
-    "ng-file-upload": "~11.0.2"
+    "ng-file-upload": "~11.0.2",
+    "ngCordova": "~0.1.24-alpha"
   }
 }
