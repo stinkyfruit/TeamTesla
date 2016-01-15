@@ -30,7 +30,16 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
       thingB: $scope.data.thingB
     }
 
-    WhichFactory.submit(which);
+    WhichFactory.submit(which).then(function(data){
+      $scope.data = {
+        mediaType: $scope.items[0],
+        question: '',
+        thingA: '',
+        thingB: '',
+        tags: ''
+      }
+    });
+
 
     //Landing page after submission
     $state.go('app.afterCreate');
