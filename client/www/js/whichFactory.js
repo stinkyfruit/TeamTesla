@@ -53,7 +53,7 @@ angular.module('which.factory', [])
    * Sends an HTTP POST request to /api/which
    **/
   var submit = function(which) {
-    console.log(which);
+
     return $http.post(serverURI + '/api/which', which)
       .then(function(res) {
         return res.data;
@@ -78,7 +78,22 @@ angular.module('which.factory', [])
       }, function(err) {
         return err;
       });
-  }
+  };
+
+  var getMostPopularWhiches = function(){
+    return $http.get(serverURI + '/api/tag/mostPop', {
+        params: {
+          userID: window.localStorage.getItem('which.userToken'),
+          resultLimit: 20
+        }
+      })
+    .then(function(res){
+      console.log(res);
+      return res.data;
+    }, function(err){
+      return err;
+    });
+  };
 
   /*
    * Gets one which with the specified ID
@@ -91,7 +106,7 @@ angular.module('which.factory', [])
       }, function(err) {
         return err;
       });
-  }
+  };
 
   /*
    * Gets all of the whiches created by a user
@@ -117,6 +132,7 @@ angular.module('which.factory', [])
     submit: submit,
     getWhichesByTag: getWhichesByTag,
     getWhichByID: getWhichByID,
-    getWhichesByUser : getWhichesByUser
+    getWhichesByUser : getWhichesByUser,
+    getMostPopularWhiches: getMostPopularWhiches
   }
 });

@@ -18,6 +18,8 @@ module.exports = function (apiRouter) {
   apiRouter.get('/tag/:tagName',        whichController.getWhichByTag);
   apiRouter.get('/tag/:tagName/newest', whichController.getNewestWhichByTag);
 
+  apiRouter.get('/tag/mostPop', whichController.getMostPopularWhiches);
+
 
 
   /*     Routes beginning with /api/user
