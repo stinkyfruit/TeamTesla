@@ -11,6 +11,7 @@ var WhichSchema = new mongoose.Schema({
   thingB : {type: String, default: ''},
   thingAVoteCount : {type: Number, default: 0},
   thingBVoteCount : {type: Number, default: 0},
+  totalVoteCount : {type: Number, default: 0},
   createdAt : { type: Date, default: Date.now }
 });
 

@@ -45,6 +45,7 @@ var defaultWhichProperties = function (dbResults) {
     thingB : 'thingB',
     thingAVoteCount : 'thingAVoteCount',
     thingBVoteCount : 'thingBVoteCount',
+    totalVoteCount : 'totalVoteCount',
     tags : 'tags',
     votesFrom : 'votesFrom',
     createdAt: 'createdAt'
