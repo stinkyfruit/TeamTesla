@@ -76,6 +76,7 @@ module.exports = {
           Optional query parameters change results accordingly.
   */
   getWhichByTag : function (req, res, next) {
+
     var dbQuery = buildDefaultWhichQuery(req);
     var resultLimit = Number(req.query.resultLimit) || 1;
 
@@ -95,12 +96,12 @@ module.exports = {
   getMostPopularWhiches : function (req, res, next) {
     // var dbQuery = buildDefaultWhichQuery(req);
     // var resultLimit = Number(req.query.resultLimit) || 1;
-
-
+    console.log('in getmostpop');
     Which.find({})
-      .sort({totalVoteCount:1})
+      .sort({totalVoteCount:-1})
       .limit(20)
       .then(function(dbResults){
+
         res.json( defaultWhichProps(dbResults) );
       })
       .catch(function(err){

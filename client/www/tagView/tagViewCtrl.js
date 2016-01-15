@@ -21,7 +21,6 @@ angular.module('which.controllers.tagView', ['which.factory', 'ionic.contrib.ui.
   $scope.getMostPopularWhiches = function(){
     WhichFactory.getMostPopularWhiches().then(function(popWhiches) {
       $scope.data.popWhiches = popWhiches;
-      console.log($scope.data);
     });
   };
 
