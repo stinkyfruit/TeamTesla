@@ -15,6 +15,10 @@
           <button class="button button-block button-positive" ng-click="myWhiches()">
             Your Whiches</button>
         </label>
+         <label class="item" ng-if="!notLoggedIn()">
+          <button class="button button-block button-positive" ng-click="startWhiches()">
+            Start Whiching</button>
+        </label>
         <label class="item" ng-if="!notLoggedIn()">
           <button class="button button-block button-positive" ng-click="browseTags()">
             Browse tags</button>

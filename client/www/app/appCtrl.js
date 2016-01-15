@@ -3,7 +3,7 @@
  */
 angular.module('which.controllers.app', ['which.factory','ionic','ionic.contrib.ui.tinderCards'])
 
-  .controller('AppCtrl', function($scope, $state, $ionicModal,User, $timeout) {
+  .controller('AppCtrl', function($scope, $state, $ionicModal,User, $timeout, WhichFactory) {
 
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('app/menu.html', {
@@ -18,6 +18,7 @@ angular.module('which.controllers.app', ['which.factory','ionic','ionic.contrib.
 
     $scope.logOut = function(){
       User.signOut();
+      $scope.modal.hide();
     };
 
     $scope.browseTags = function() {
@@ -42,5 +43,18 @@ angular.module('which.controllers.app', ['which.factory','ionic','ionic.contrib.
     $scope.myWhiches = function() {
       $state.go('app.whichesByUser');
       $scope.modal.hide();
-    }
+    };
+
+    $scope.startWhiches = function(){
+      WhichFactory.getNew().then(function(which) {
+        $state.go('app.which', {
+          id: which[0].id,
+          question: which[0].question,
+          thingA: which[0].thingA,
+          thingB: which[0].thingB
+          //tags: which.tags
+        });
+        $scope.modal.hide();
+      }); 
+    };
   })
