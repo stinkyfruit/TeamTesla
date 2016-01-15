@@ -93,13 +93,13 @@ module.exports = {
   },
 
   getMostPopularWhiches : function (req, res, next) {
-    var dbQuery = buildDefaultWhichQuery(req);
-    var resultLimit = Number(req.query.resultLimit) || 1;
+    // var dbQuery = buildDefaultWhichQuery(req);
+    // var resultLimit = Number(req.query.resultLimit) || 1;
 
 
-    Which.find(dbQuery)
-      .sort({totalVoteCount:1}) // oldest first
-      .limit(resultLimit)
+    Which.find({})
+      .sort({totalVoteCount:1})
+      .limit(20)
       .then(function(dbResults){
         res.json( defaultWhichProps(dbResults) );
       })

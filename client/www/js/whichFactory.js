@@ -74,6 +74,7 @@ angular.module('which.factory', [])
         }
       })
       .then(function(res) {
+        console.log('by tag response data', res.data);
         return res.data;
       }, function(err) {
         return err;
@@ -82,13 +83,9 @@ angular.module('which.factory', [])
 
   var getMostPopularWhiches = function(){
     return $http.get(serverURI + '/api/tag/mostPop', {
-        params: {
-          userID: window.localStorage.getItem('which.userToken'),
-          resultLimit: 20
-        }
       })
     .then(function(res){
-      console.log(res);
+      console.log('most pop response data', res.data);
       return res.data;
     }, function(err){
       return err;
