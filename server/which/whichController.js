@@ -92,6 +92,22 @@ module.exports = {
       });
   },
 
+  getMostPopularWhiches : function (req, res, next) {
+    // var dbQuery = buildDefaultWhichQuery(req);
+    // var resultLimit = Number(req.query.resultLimit) || 1;
+
+
+    Which.find({})
+      .sort({totalVoteCount:1})
+      .limit(20)
+      .then(function(dbResults){
+        res.json( defaultWhichProps(dbResults) );
+      })
+      .catch(function(err){
+        throw err;
+      });
+  },
+
 
   /*        Route Handler - GET /api/tag/:tagName/newest
 
@@ -176,6 +192,7 @@ module.exports = {
     // If found, increment appropriate VoteCount property, and push user to votesFrom
     var updateCommand = { $inc: {}, $push: {votesFrom: userID} };
     updateCommand.$inc['thing'+ choice + 'VoteCount'] = 1;
+    updateCommand.$inc['totalVoteCount'] = 1;
 
     Which.findOneAndUpdate(query, updateCommand, {new:true}) // include updated values in dbResults
       .then(function(dbResults){

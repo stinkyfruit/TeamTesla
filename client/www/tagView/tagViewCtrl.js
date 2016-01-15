@@ -13,8 +13,16 @@ angular.module('which.controllers.tagView', ['which.factory', 'ionic.contrib.ui.
     if ($scope.data.tagSearch !== '') {
       WhichFactory.getWhichesByTag($scope.data.tagSearch).then(function(whiches) {
         $scope.data.whiches = whiches;
-      })
+
+      });
     }
+  };
+
+  $scope.getMostPopularWhiches = function(){
+    WhichFactory.getMostPopularWhiches().then(function(popWhiches) {
+      $scope.data.popWhiches = popWhiches;
+      console.log($scope.data);
+    });
   };
 
   $scope.goToWhich = function(id) {
