@@ -1,6 +1,6 @@
 angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.tinderCards','ngFileUpload'])
 
-.controller('CreateCtrl', function($scope, $state, WhichFactory,$cordovaImagePicker,$ionicPlatform,ImageUploadService) {
+.controller('CreateCtrl', function($scope, $state, WhichFactory, $cordovaImagePicker, $ionicPlatform, ImageUploadService, $cordovaCamera, $ionicLoading) {
   //sets the options for the "Media Type" drop-down
   $scope.items = [{
     id: 1,
@@ -18,6 +18,19 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
     tags: ''
   }
 
+
+  // ionic loading screen
+  $scope.show = function() {
+    $ionicLoading.show({
+      template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+    });
+  };
+
+  $scope.hide = function(){
+        $ionicLoading.hide();
+  };
+
+
   //Submission of Which with input details
   $scope.submit = function() {
 
@@ -27,7 +40,8 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
       tags: $scope.data.tags.split(' '),
       type: $scope.data.mediaType.label.toLowerCase(),
       thingA: $scope.data.thingA,
-      thingB: $scope.data.thingB
+      thingB: $scope.data.thingB,
+      imageURI: ''
     }
 
     WhichFactory.submit(which);
@@ -56,31 +70,83 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
 
   $ionicPlatform.ready(function() {
 
-    $scope.getImage = function() {
-      // Image picker will load images according to these settings
+    // $scope.getImage = function() {
+    //   // Image picker will load images according to these settings
+    //   var options = {
+    //     maximumImagesCount: 2, // Max number of selected images
+    //     width: 800,
+    //     height: 800,
+    //     quality: 80            // Higher is better
+    //   };
+
+    //   $cordovaImagePicker.getPictures(options).then(function (results) {
+    //     //If repeated selection, set the scope to an empty array
+    //     $scope.collection.selectedImage = [];
+
+    //     // Loop through acquired images
+    //     for (var i = 0; i < results.length; i++) {
+    //       console.log('Image URI: ' + results[i]);
+    //       $scope.collection.selectedImage.push(results[i]);   // We load only one image so we can use it like this
+
+    //       uploadFiles(results[i])
+    //     }
+
+    //   }, function(error) {
+    //     console.log('Error: ' + JSON.stringify(error));    // In case of error
+    //   });
+    // };
+
+    // take picture with camera
+
+    $scope.getImage = function () {
+                  var options = {
+                    quality: 75,
+                    destinationType: Camera.DestinationType.DATA_URL,
+                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                    allowEdit: true,
+                    encodingType: Camera.EncodingType.JPEG,
+                    targetWidth:300,
+                    targetHeight: 300,
+                    popoverOptions: CameraPopoverOptions,
+                    saveToPhotoAlbum: false
+                };
+   
+                    $cordovaCamera.getPicture(options).then(function (imageData) {
+                        $scope.imgURI = "data:image/jpeg;base64," + imageData;
+                        which.imageURI = imageData;
+                    }, function (err) {
+
+                        // An error occured. Show a message to the user
+                    });
+                }
+
+
+
+    $scope.takePic = function () {
+      
+      // $scope.show($ionicLoading);
+      
       var options = {
-        maximumImagesCount: 2, // Max number of selected images
-        width: 800,
-        height: 800,
-        quality: 80            // Higher is better
-      };
-
-      $cordovaImagePicker.getPictures(options).then(function (results) {
-        //If repeated selection, set the scope to an empty array
-        $scope.collection.selectedImage = [];
-
-        // Loop through acquired images
-        for (var i = 0; i < results.length; i++) {
-          console.log('Image URI: ' + results[i]);
-          $scope.collection.selectedImage.push(results[i]);   // We load only one image so we can use it like this
-
-          uploadFiles(results[i])
-        }
-
-      }, function(error) {
-        console.log('Error: ' + JSON.stringify(error));    // In case of error
-      });
-    };
+                    quality: 75,
+                    destinationType: Camera.DestinationType.DATA_URL,
+                    sourceType: Camera.PictureSourceType.CAMERA,
+                    allowEdit: false,
+                    encodingType: Camera.EncodingType.JPEG,
+                    targetWidth: 500,
+                    targetHeight: 500,
+                    popoverOptions: CameraPopoverOptions,
+                    saveToPhotoAlbum: false
+                  };
+   
+                    $cordovaCamera.getPicture(options).then(function (imageData) {
+                        // $scope.imgURI = "data:image/jpeg;base64," + imageData;
+                        which.imageURI = imageData;
+                    }, function (err) {
+                        // An error occured. Show a message to the user
+                    });
+                }
+                  
+    
 
   });
 
@@ -116,6 +182,8 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
 
       })
   }
+
+  
 
 
 })
