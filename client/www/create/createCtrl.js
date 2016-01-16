@@ -41,7 +41,6 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
       type: $scope.data.mediaType.label.toLowerCase(),
       thingA: $scope.data.thingA,
       thingB: $scope.data.thingB,
-      imageURI: ''
     }
 
     WhichFactory.submit(which);
