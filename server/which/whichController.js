@@ -99,7 +99,7 @@ module.exports = {
     console.log('in getmostpop');
     Which.find({})
       .sort({totalVoteCount:-1})
-      .limit(20)
+      .limit(5)
       .then(function(dbResults){
 
         res.json( defaultWhichProps(dbResults) );
