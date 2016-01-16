@@ -14,11 +14,11 @@ module.exports = function (apiRouter) {
   apiRouter.post('/which',                whichController.createWhich);
   apiRouter.post('/which/:whichID/judge', whichController.judgeWhich);
   apiRouter.post('/which/:whichID/tag',   whichController.tagWhich);
+  apiRouter.get('/tag/mostPop', whichController.getMostPopularWhiches);
 
   apiRouter.get('/tag/:tagName',        whichController.getWhichByTag);
   apiRouter.get('/tag/:tagName/newest', whichController.getNewestWhichByTag);
 
-  apiRouter.get('/tag/mostPop', whichController.getMostPopularWhiches);
 
 
 
