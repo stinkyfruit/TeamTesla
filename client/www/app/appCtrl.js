@@ -50,11 +50,13 @@ angular.module('which.controllers.app', ['which.factory','ionic','ionic.contrib.
     }
     $scope.startWhiches = function(){
       WhichFactory.getNew().then(function(which) {
+        which[0].imageURI = WhichFactory.defaultImage(which[0].imageURI);
         $state.go('app.which', {
           id: which[0].id,
           question: which[0].question,
           thingA: which[0].thingA,
-          thingB: which[0].thingB
+          thingB: which[0].thingB,
+          imageURI: which[0].imageURI
           //tags: which.tags
         });
         $scope.modal.hide();
