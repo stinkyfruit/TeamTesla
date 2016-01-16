@@ -12,7 +12,8 @@ angular.module('which.controllers.which', ['which.factory', 'ionic.contrib.ui.ti
       id: $stateParams.id,
       question: $stateParams.question,
       thingA: $stateParams.thingA,
-      thingB: $stateParams.thingB
+      thingB: $stateParams.thingB,
+      imageURI: "data:image/jpeg;base64," + $stateParams.imageURI
     },
     cardSrc: ''
   };
