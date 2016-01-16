@@ -36,7 +36,6 @@ angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'
     var letter = result[result.length -1].toLowerCase();
     var choice = $scope.data.which[0][result];
     WhichFactory.choose(choice, $scope.data.which[0].id, $scope.data.username).then(function(votingResult) {
-      console.log(votingResult)
 
       //Allows for state change, showing new view, second argument is the params being sent in to display results
       $state.go('app.result', {
@@ -46,12 +45,12 @@ angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'
       });
     });
 
-  }
+  };
 
   $scope.$on('discard', function(event, element, card) {
     $scope.decide(card);
   });
-})
+});
 
 
 

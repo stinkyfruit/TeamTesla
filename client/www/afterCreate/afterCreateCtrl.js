@@ -7,11 +7,11 @@ angular.module('which.controllers.afterCreate', ['which.factory', 'ionic.contrib
     $scope.getNewWhich = function() {
       WhichFactory.getNew().then(function(which) {
         $state.go('app.which', {
-          id: which[0].id,
-          question: which[0].question,
-          thingA: which[0].thingA,
-          thingB: which[0].thingB,
-          imageURI: which[0].imageURI
+          id: $scope.getRandomWhich(which).id,
+          question: $scope.getRandomWhich(which).question,
+          thingA: $scope.getRandomWhich(which).thingA,
+          thingB: $scope.getRandomWhich(which).thingB,
+          imageURI: $scope.getRandomWhich(which).imageURI
           //tags: which.tags
         });
       });
@@ -20,6 +20,11 @@ angular.module('which.controllers.afterCreate', ['which.factory', 'ionic.contrib
     //Navigate to creation page via state change
     $scope.create = function() {
       $state.go('app.create');
-    }
+    };
+
+    //generating random array value for getNewWhich 
+    $scope.getRandomWhich = function(array){
+      return array[Math.floor(Math.random()*array.length)];
+    };
 
   });

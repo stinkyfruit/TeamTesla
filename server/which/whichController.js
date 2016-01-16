@@ -27,11 +27,8 @@ module.exports = {
   */
   getWhich : function (req, res, next) {
     var dbQuery = buildDefaultWhichQuery(req);
-    var resultLimit  = Number(req.query.resultLimit) || 1;
 
     Which.find(dbQuery)
-      .sort({createdAt:1}) // oldest first
-      .limit(resultLimit)
       .then(function(dbResults){
         res.json( defaultWhichProps(dbResults) );
       })
