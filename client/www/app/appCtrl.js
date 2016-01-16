@@ -44,7 +44,10 @@ angular.module('which.controllers.app', ['which.factory','ionic','ionic.contrib.
       $state.go('app.whichesByUser');
       $scope.modal.hide();
     };
-
+    $scope.test = function(){
+      $state.go('app.whichSwoosh');
+      $scope.modal.hide();
+    }
     $scope.startWhiches = function(){
       WhichFactory.getNew().then(function(which) {
         $state.go('app.which', {
