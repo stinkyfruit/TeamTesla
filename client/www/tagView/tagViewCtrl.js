@@ -32,7 +32,7 @@ angular.module('which.controllers.tagView', ['which.factory', 'ionic.contrib.ui.
         question: which.question,
         thingA: which.thingA,
         thingB: which.thingB,
-        imageURI: which.imageURI,
+        imageURI: which.imageURI
       });
     })
   }
