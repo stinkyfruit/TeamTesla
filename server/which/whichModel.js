@@ -12,7 +12,8 @@ var WhichSchema = new mongoose.Schema({
   thingAVoteCount : {type: Number, default: 0},
   thingBVoteCount : {type: Number, default: 0},
   totalVoteCount : {type: Number, default: 0},
-  createdAt : { type: Date, default: Date.now }
+  createdAt : {type: Date, default: Date.now},
+  imageURI: {type: String, default: ''}
 });
 
 module.exports = mongoose.model('Which', WhichSchema);

@@ -10,7 +10,8 @@ angular.module('which.controllers.afterCreate', ['which.factory', 'ionic.contrib
           id: which[0].id,
           question: which[0].question,
           thingA: which[0].thingA,
-          thingB: which[0].thingB
+          thingB: which[0].thingB,
+          imageURI: which[0].imageURI
           //tags: which.tags
         });
       });
