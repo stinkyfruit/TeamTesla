@@ -6,6 +6,8 @@ angular.module('which', ['ionic',
   'which.controllers.result',
   'which.controllers.tagView',
   'which.controllers.which',
+  //TESTING
+  'which.controllers.whichcopy',
   'which.controllers.signUp',
   'which.controllers.whichesByUser',
   'which.controllers.whichInfoCtrl',
@@ -65,6 +67,23 @@ angular.module('which', ['ionic',
       'menuContent': {
         templateUrl: 'which/which.html',
         controller: 'WhichCtrl'
+      }
+    }
+  })
+
+  //TESTING WHICH COPY
+  .state('app.whichcopy', {
+    url: '/whichcopy',
+    params: {
+      id: '1',
+      question: " which one should I purchase?",
+      thingA: 'https://trouver.files.wordpress.com/2011/06/peonies-5.jpg?width=300h',
+      thingB: 'http://blogs.mydevstaging.com/blogs/everydaygardeners/files/2013/06/visi101299.jpg'
+    },
+    views: {
+      'menuContent': {
+        templateUrl: 'whichcopy/whichcopy.html',
+        controller: 'whichcopyCtrl'
       }
     }
   })
