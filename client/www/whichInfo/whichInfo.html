@@ -1,4 +1,5 @@
 <ion-view view-title="{{data.which.createdAt}}">
+<ion-content>
   <ion-pane class="pane">
     <ion-header-bar class="bar-stable">
       <h1 class="title">{{data.which.question}}</h1>
@@ -18,7 +19,13 @@
         </div>
         <div class="yes-text">{{data.which.thingBVoteCount}}</div>
         <div class="no-text">{{data.which.thingAVoteCount}}</div>
+      <div>
+        <img ng-show="data.imageURI !== undefined" ng-src="{{data.imageURI}}" style="text-align: center">
+      </div>
       </td-card>
     </td-cards>
-  </ion-pane>
+     
+    </ion-pane>
+   
+</ion-content>
 </ion-view>

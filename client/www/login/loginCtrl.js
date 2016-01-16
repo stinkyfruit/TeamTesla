@@ -10,6 +10,7 @@ angular.module('which.controllers.login', ['which.factory', 'ionic.contrib.ui.ti
   };
 
   $scope.login = function() {
+    console.log('loggin in!');
     User.login($scope.data).then(function(response) {
       if(response.id !== undefined) {
         $state.go('app.tagView');

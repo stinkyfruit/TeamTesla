@@ -52,6 +52,8 @@ module.exports = {
 
     Which.findOne({_id: whichID})
       .then(function(dbResults){
+        console.log('get by id')
+
         res.json( defaultWhichProps(dbResults) );
       })
       .catch(function(err){
@@ -154,7 +156,6 @@ module.exports = {
   */
   createWhich : function (req, res, next) {
     var data = req.body;
-
     var newWhich = {
       question: data.question,
       createdBy: data.createdBy, // userID

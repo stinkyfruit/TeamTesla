@@ -33,6 +33,7 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
 
   //Submission of Which with input details
   $scope.submit = function() {
+ 
     // console.log($scope.imageDb);
     var which = {
       question: $scope.data.question,

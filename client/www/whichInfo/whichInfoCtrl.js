@@ -10,8 +10,9 @@ angular.module('which.controllers.whichInfoCtrl', ['which.factory', 'ionic.contr
     activeSlide: 1,
     which: $stateParams.which,
     cardSrc: '',
+    imageURI: "data:image/jpeg;base64," + $stateParams.which.imageURI,
   };
-  console.log($scope.data);
+ 
   $scope.data.type = ($scope.data.which.thingA.substring(0,4) === 'http')?'image':'text'
 
   $scope.data.things = [$scope.data.which.thingA, $scope.data.which.question, $scope.data.which.thingB];

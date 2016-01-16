@@ -9,7 +9,7 @@ angular.module('which.controllers.whichesByUser', ['which.factory', 'ionic.contr
 
     WhichFactory.getWhichesByUser().then(function (whiches) {
       $scope.data.whiches = whiches;
-      console.log(whiches);
+    
     });
   });
 
