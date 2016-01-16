@@ -6,6 +6,7 @@ angular.module('which', ['ionic',
   'which.controllers.result',
   'which.controllers.tagView',
   'which.controllers.which',
+  'which.controllers.whichSwoosh',
   //TESTING
   'which.controllers.whichcopy',
   'which.controllers.signUp',
@@ -15,7 +16,8 @@ angular.module('which', ['ionic',
   'which.cloudinaryFactory',
   'user.factory',
   'ionic.contrib.ui.tinderCards',
-  'ngCordova'
+  'ngCordova',
+  'ionic.swoosh.cards'
 ])
 
 .run(function($rootScope, $ionicPlatform, User, $state) {
@@ -71,6 +73,16 @@ angular.module('which', ['ionic',
     }
   })
 
+  .state('app.whichSwoosh', {
+    url: '/whichSwoosh',
+    views:{
+      'menuContent':{
+        templateUrl: 'which/whichSwoosh.html',
+        controller: 'CardsCtrl'
+      }
+     
+    }
+  })
   //TESTING WHICH COPY
   .state('app.whichcopy', {
     url: '/whichcopy',

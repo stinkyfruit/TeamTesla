@@ -179,3 +179,117 @@ td-card img {
   font-size: 20px;
   font-family: sans-serif;
 }
+
+
+/* SWOOSH CARD CORE */
+
+swoosh-cards {
+  display: block;
+}
+
+swoosh-card {
+  position: absolute;
+  top: calc(50% - 200px);
+  left: calc(50% - 125px);
+  width: 250px;
+  height: 450px;
+  border-radius: 6px;
+  background-color: #FFF;
+  border-style: solid;
+  border-color: grey;
+  overflow: hidden;
+}
+
+swoosh-card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #333;
+  opacity: 0;
+  z-index: 11;
+}
+
+swoosh-card .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+/* DEMO */
+swoosh-card .top {
+  width: 100%;
+  height: 160px;
+  border-radius: 4px 4px 0 0;
+  overflow: hidden;
+}
+
+swoosh-card img {
+  width: 100%;
+}
+
+swoosh-card .bottom {
+  border-radius: 0 0 4px 4px;
+  width: 100%;
+  height: 280px;
+  overflow: auto;
+
+}
+
+swoosh-card .bottom h1 {
+  margin: 10px 0 0 0;
+  font-size: 14px;
+  text-align: center;
+}
+
+swoosh-card .bottom p {
+  margin: 10px 15px;
+  font-size: 11px;
+}
+
+.discard {
+  position: absolute;
+  left: calc(50% - 90px);
+  bottom: 10px;
+  padding: 7px 10px;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 12px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 20px 20px 20px 20px;
+}
+.discard2 {
+  position: absolute;
+  left: calc(50% + 20px);
+  bottom: 10px;
+  padding: 7px 10px;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 12px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 20px 20px 20px 20px;
+}
+
+.background-grey {
+  background-color: #333 !important;
+}
+
+#left{
+  float:left;
+  width: 50%;
+  height: 80%;
+/*  background-color: pink;*/
+}
+#right{
+  float: right;
+  width: 50%;
+  height: 80%;
+/*  background-color: grey;*/
+}
+#votes{
+  font-size: 26px;
+}

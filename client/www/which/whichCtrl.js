@@ -1,60 +1,57 @@
 /**
  * Created by VaibhavNamburi on 11/01/2016.
  */
-angular.module('which.controllers.which', ['which.factory', 'ionic.contrib.ui.tinderCards'])
+angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'])
 
+.directive('noScroll', function($document) {
 
-.controller('WhichCtrl', function($scope, $state, $stateParams, WhichFactory) {
+  return {
+    restrict: 'A',
+    link: function($scope, $element, $attr) {
+      $document.on('touchmove', function(e) {
+        e.preventDefault();
+      });
+    }
+  }
+})
+
+.controller('WhichCtrl', function($scope, $timeout, $state, $stateParams, WhichFactory) {
   $scope.data = {
     username: window.localStorage.getItem('which.userToken'),
     activeSlide: 1,
-    which: {
+    which: [{
       id: $stateParams.id,
       question: $stateParams.question,
       thingA: $stateParams.thingA,
       thingB: $stateParams.thingB,
-      imageURI: "data:image/jpeg;base64," + $stateParams.imageURI
-    },
-    cardSrc: ''
+      imageURI: 'http://c4.staticflickr.com/4/3924/18886530069_840bc7d2a5_m.jpg',
+      // imageURI: "data:image/jpeg;base64," + $stateParams.imageURI
+    }],
+  
   };
 
-  $scope.data.choice = '';
-  //TODO: fix this
-  $scope.data.type = ($scope.data.which.thingA.substring(0,4) === 'http')?'image':'text'
-  $scope.data.things = [$scope.data.which.thingA, $scope.data.which.question, $scope.data.which.thingB];
-
-
-  $scope.cardPartialSwipe = function(amt) {
-    var threshold = .15;
-    if (amt < 0 - threshold) {
-      $scope.data.cardSrc = $scope.data.which.thingA;
-      $scope.data.choice = 'a';
-    } else if (amt > threshold) {
-      $scope.data.cardSrc = $scope.data.which.thingB;
-      $scope.data.choice = 'b';
-    } else {
-      $scope.data.cardSrc = '';
-    }
-  };
 
   //This gets called when the user swipes, making a decision with the choice from the user
-  $scope.decide = function() {
-    WhichFactory.choose($scope.data.choice, $scope.data.which.id, $scope.data.username).then(function(votingResult) {
+  $scope.decide = function(result) {
+    var letter = result[result.length -1].toLowerCase();
+    var choice = $scope.data.which[0][result];
+    WhichFactory.choose(choice, $scope.data.which[0].id, $scope.data.username).then(function(votingResult) {
       console.log(votingResult)
 
       //Allows for state change, showing new view, second argument is the params being sent in to display results
       $state.go('app.result', {
         a: votingResult.votesForA,
         b: votingResult.votesForB,
-        choice: $scope.data.choice
+        choice: letter
       });
     });
 
   }
 
-  $scope.originalData = angular.copy($scope.data);
-
-  $scope.$on('clear', function(event, state) {
-      $scope.data = angular.copy($scope.originalData);
+  $scope.$on('discard', function(event, element, card) {
+    $scope.decide(card);
   });
 })
+
+
+

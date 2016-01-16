@@ -9,6 +9,7 @@ angular.module('user.factory', [])
 
   var apiUrl = 'http://secure-castle-2561.herokuapp.com';
 
+
   /*
    * Sends login credentials from submit form to server
    * Based on response, function enables login session and sets token in localStorage

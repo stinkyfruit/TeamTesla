@@ -4,26 +4,28 @@
     <ion-header-bar class="bar-stable">
       <h1 class="title">{{data.which.question}}</h1>
     </ion-header-bar>
-    <td-cards>
-      <td-card on-destroy="back()" on-partial-swipe="cardPartialSwipe(amt)" class="card-{{$index}}" on-snap-back="cardPartialSwipe(0)">
-        <div class="image" ng-if="data.type === 'image'">
-          <img ng-if="data.cardSrc!==''" ng-src="{{data.cardSrc}}">
+    <swoosh-cards>
+      <swoosh-card ng-repeat="which in data.which">
+        <div ng-controller="WhichCtrl">
+          <div class="top">
+            <img ng-src="{{ which.imageURI }}" />
+          </div>
+          <div class="bottom">
+            <h1>{{ which.question }}</h1>
+            <div id="left">
+              <p id="votes">{{ which.thingAVoteCount }}</p>
+              <p>{{which.thingA}}<p>
+            </div>
+            <div id="right">
+              <p id="votes">{{ which.thingBVoteCount }}</p>
+              <p>{{which.thingB}}<p>
+               
+            </div>
+            <div ng-click="back()">Back</div>
+          </div>
         </div>
-        <div class="image" ng-if="data.type === 'text'">
-          <h2 ng-if="data.cardSrc!==''">{{data.cardSrc}}</h2>
-        </div>
-        <h1 ng-if="data.cardSrc===''">{{data.which.question}}</h1>
-        <div class="item item-text-wrap">
-        <h1 ng-if="data.cardSrc===''"><span class="choices">swipe <b>left</b> for:</span><br>{{data.which.thingA}}</h1>
-        <h1 ng-if="data.cardSrc===''"> <span class="choices">swipe <b>right</b> for:</span><br>{{data.which.thingB}}</h1>
-        </div>
-        <div class="yes-text">{{data.which.thingBVoteCount}}</div>
-        <div class="no-text">{{data.which.thingAVoteCount}}</div>
-      <div>
-        <img ng-show="data.imageURI !== undefined" ng-src="{{data.imageURI}}" style="text-align: center">
-      </div>
-      </td-card>
-    </td-cards>
+      </swoosh-card>
+    </swoosh-cards>
      
     </ion-pane>
    
