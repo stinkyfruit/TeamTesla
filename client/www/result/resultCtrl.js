@@ -13,14 +13,19 @@ angular.module('which.controllers.result', ['which.factory', 'ionic.contrib.ui.t
     //Function displays new which, calling the getNew factory function, and navigating to which page along with the newest which.
     $scope.getNewWhich = function() {
       WhichFactory.getNew().then(function(which) {
-
+        console.log(which);
         $state.go('app.which', {
-          id: which[0].id,
-          question: which[0].question,
-          thingA: which[0].thingA,
-          thingB: which[0].thingB
+          id: $scope.getRandomWhich(which).id,
+          question: $scope.getRandomWhich(which).question,
+          thingA: $scope.getRandomWhich(which).thingA,
+          thingB: $scope.getRandomWhich(which).thingB
           //tags: which.tags
         });
       });
+    };
+
+    //generating random array value
+    $scope.getRandomWhich = function(array){
+      return array[Math.floor(Math.random()*array.length)];
     };
   });
