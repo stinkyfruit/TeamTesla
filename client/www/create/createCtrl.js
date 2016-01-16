@@ -1,6 +1,6 @@
 angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.tinderCards','ngFileUpload'])
 
-.controller('CreateCtrl', function($scope, $state, WhichFactory, $cordovaImagePicker, $ionicPlatform, ImageUploadService, $cordovaCamera, $ionicLoading) {
+.controller('CreateCtrl', function($scope, $state, WhichFactory, $cordovaImagePicker, $ionicPlatform, ImageUploadService, $cordovaCamera, $ionicLoading, $ionicScrollDelegate, $timeout) {
   //sets the options for the "Media Type" drop-down
   $scope.items = [{
     id: 1,
@@ -66,7 +66,9 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
   IonicPlatform.ready ensures that the application is fully booted and ready prior to getting access to native features
   $cordovaImagePicker gives access to the gallery and on confirmation returns an array of rooth paths to the image
    */
-
+   $scope.resize = function () {
+    $ionicScrollDelegate.resize()
+   }
 
   $ionicPlatform.ready(function() {
 
@@ -114,6 +116,11 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
                     $cordovaCamera.getPicture(options).then(function (imageData) {
                         $scope.imgURI = "data:image/jpeg;base64," + imageData;
                         which.imageURI = imageData;
+                        setTimeout(function () {
+                
+                          $ionicScrollDelegate.resize()
+                        },0)
+                        
                     }, function (err) {
 
                         // An error occured. Show a message to the user
@@ -139,8 +146,9 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
                   };
    
                     $cordovaCamera.getPicture(options).then(function (imageData) {
-                        // $scope.imgURI = "data:image/jpeg;base64," + imageData;
+                        $scope.imgURI = "data:image/jpeg;base64," + imageData;
                         which.imageURI = imageData;
+                        $ionicScrollDelegate.resize();
                     }, function (err) {
                         // An error occured. Show a message to the user
                     });

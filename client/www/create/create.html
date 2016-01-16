@@ -1,6 +1,6 @@
 <ion-view view-title="Create">
-  <ion-content>
-
+  <ion-content class="padding">
+    <button ng-click="resize()">resize</button>
     <div class="list">
       <label class="item item-input item-select">
         <div class="input-label">
@@ -36,7 +36,6 @@
         <input type="text" ng-model="data.thingB" placeholder="B">
       </a>
     </div>
-    {{showuri}} show image info
     <div class="card">
       <div class="item item-divider">
         Please enter all your tags :
@@ -45,7 +44,9 @@
         <input ng-model="data.tags" type="text" placeholder="tags">
       </a>
     </div>
+    <div>
     <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}" style="text-align: center">
+    </div>
     <ion-button class="button button-balanced button-block" ng-click="submit()">Submit Which!</ion-button>
 
 

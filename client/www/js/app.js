@@ -40,7 +40,7 @@ angular.module('which', ['ionic',
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider,$compileProvider) {
+.config(function($stateProvider, $urlRouterProvider, $compileProvider, $ionicConfigProvider) {
   $stateProvider
 
   //Main app state, contains the logic/views for the menu and login
@@ -171,5 +171,10 @@ angular.module('which', ['ionic',
   $urlRouterProvider.otherwise('/app/login');
 
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob|content):|data:image\//);
+
+  if (!ionic.Platform.isIOS()) {
+    $ionicConfigProvider.scrolling.jsScrolling(false);
+  }
+
 
 });
