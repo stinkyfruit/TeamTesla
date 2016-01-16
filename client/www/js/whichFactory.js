@@ -9,7 +9,7 @@ angular.module('which.factory', [])
 
   $http.defaults.headers.common.Authorization = 'Bearer' + token;
 
-  var serverURI = 'http://secure-castle-2561.herokuapp.com';
+  var serverURI = 'http://localhost:5007';
 
   /*
    * choose function is called after a decision has been made.
@@ -53,9 +53,9 @@ angular.module('which.factory', [])
    * Sends an HTTP POST request to /api/which
    **/
   var submit = function(which) {
-
     return $http.post(serverURI + '/api/which', which)
       .then(function(res) {
+
         return res.data;
       }, function(err) {
         return err;

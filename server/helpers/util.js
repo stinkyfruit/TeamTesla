@@ -21,6 +21,7 @@ var selectProperties = function (dbResults, props) {
   if (typeof props !== 'object' || props === null) return dbResults;
 
   if ( Array.isArray(dbResults) ) {
+
     return dbResults.map(function(oldObj){
       return Object.keys(props).reduce(function(newObj, key){
         newObj[props[key]] = oldObj[key];
@@ -28,6 +29,7 @@ var selectProperties = function (dbResults, props) {
       },{});
     });
   } else {
+  
     return Object.keys(props).reduce(function(newObj, key){
         newObj[props[key]] = dbResults[key];
         return newObj;
@@ -48,7 +50,8 @@ var defaultWhichProperties = function (dbResults) {
     totalVoteCount : 'totalVoteCount',
     tags : 'tags',
     votesFrom : 'votesFrom',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    imageURI: 'imageURI'
   };
   return selectProperties(dbResults, defaultProps);
 };
