@@ -47,17 +47,22 @@ angular.module('which.controllers.app', ['which.factory','ionic','ionic.contrib.
     $scope.test = function(){
       $state.go('app.whichSwoosh');
       $scope.modal.hide();
-    }
+    };
     $scope.startWhiches = function(){
       WhichFactory.getNew().then(function(which) {
         $state.go('app.which', {
-          id: which[0].id,
-          question: which[0].question,
-          thingA: which[0].thingA,
-          thingB: which[0].thingB
+          id: $scope.getRandomWhich(which).id,
+          question: $scope.getRandomWhich(which).question,
+          thingA: $scope.getRandomWhich(which).thingA,
+          thingB: $scope.getRandomWhich(which).thingB
           //tags: which.tags
         });
         $scope.modal.hide();
-      }); 
+      });
     };
-  })
+
+    //generating random array value
+    $scope.getRandomWhich = function(array){
+      return array[Math.floor(Math.random()*array.length)];
+    };
+  });
