@@ -1,9 +1,6 @@
-<ion-view view-title="{{data.which.createdAt}}">
+<ion-view view-title="{{data.which[0].createdAt}}">
 <ion-content>
   <ion-pane class="pane">
-    <ion-header-bar class="bar-stable">
-      <h1 class="title">{{data.which.question}}</h1>
-    </ion-header-bar>
     <swoosh-cards>
       <swoosh-card ng-repeat="which in data.which">
         <div ng-controller="WhichCtrl">
