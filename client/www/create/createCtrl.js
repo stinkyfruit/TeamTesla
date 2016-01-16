@@ -9,7 +9,7 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
     id: 2,
     label: 'Text'
   }];
-
+  $scope.imageDb = 'hi';
   $scope.data = {
     mediaType: $scope.items[0],
     question: '',
@@ -27,13 +27,13 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
   };
 
   $scope.hide = function(){
-        $ionicLoading.hide();
+    $ionicLoading.hide();
   };
 
 
   //Submission of Which with input details
   $scope.submit = function() {
-
+    // console.log($scope.imageDb);
     var which = {
       question: $scope.data.question,
       createdBy: window.localStorage.getItem('which.userToken'),
@@ -41,6 +41,7 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
       type: $scope.data.mediaType.label.toLowerCase(),
       thingA: $scope.data.thingA,
       thingB: $scope.data.thingB,
+      imageURI: $scope.imageDb
     }
 
     WhichFactory.submit(which);
@@ -114,9 +115,8 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
    
                     $cordovaCamera.getPicture(options).then(function (imageData) {
                         $scope.imgURI = "data:image/jpeg;base64," + imageData;
-                        which.imageURI = imageData;
+                        $scope.imageDb = imageData;
                         setTimeout(function () {
-                
                           $ionicScrollDelegate.resize()
                         },0)
                         
@@ -146,7 +146,7 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
    
                     $cordovaCamera.getPicture(options).then(function (imageData) {
                         $scope.imgURI = "data:image/jpeg;base64," + imageData;
-                        which.imageURI = imageData;
+                        $scope.imageDb = imageData;
                         $ionicScrollDelegate.resize();
                     }, function (err) {
                         // An error occured. Show a message to the user
