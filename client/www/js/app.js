@@ -203,9 +203,5 @@ angular.module('which', ['ionic',
 
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob|content):|data:image\//);
 
-  if (!ionic.Platform.isIOS()) {
-    $ionicConfigProvider.scrolling.jsScrolling(false);
-  }
-
 
 });
