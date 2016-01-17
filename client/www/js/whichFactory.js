@@ -10,6 +10,8 @@ angular.module('which.factory', [])
   $http.defaults.headers.common.Authorization = 'Bearer' + token;
 
   var serverURI = 'http://secure-castle-2561.herokuapp.com';
+  // 'http://localhost:5007';
+
 
 
   var defaultImage = function(image){
