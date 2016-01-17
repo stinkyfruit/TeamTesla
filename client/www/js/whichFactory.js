@@ -52,10 +52,8 @@ angular.module('which.factory', [])
         }
       })
       .then(function(res) {
-        console.log('positive');
         return res.data;
       }, function(err) {
-        console.log('negative');
         return err;
       });
   }
