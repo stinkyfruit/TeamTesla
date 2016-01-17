@@ -1,59 +1,65 @@
 <ion-view view-title="Create">
-  <ion-content class="padding">
-    <button ng-click="resize()">resize</button>
-    <div class="list">
-      <label class="item item-input item-select">
-        <div class="input-label">
-          &nbsp;
+  <ion-content class="padding padding-top-50">
+    <form name="createWhich">
+      <div class="row">
+        <div class="col">
+          <span class="input textarea" ng-class="{ 'filled': question.focus || data.question.length > 0, 'onfocus': question.focus}">
+          <span class="fill-line"></span>
+          <label>Question</label>
+          <textarea  
+                  type="text"
+                  name="question" 
+                  ng-model="data.question"
+                  ng-focus="question.focus = true"
+                  ng-blur="question.focus = false"
+                  required>
+          </textarea>
         </div>
-        <select ng-options="item as item.label for item in items track by item.id" ng-model="data.mediaType"></select>
-      </label>
-    </div>
-
-    <div class="card">
-      <div class="item item-divider">
-        Your Question
       </div>
-      <a class="item item-input">
-        <input ng-model="data.question" type="text" placeholder="your question">
-      </a>
-    </div>
 
-    <div class="card" >
-      <div class="item item-divider">
-        Your first selection :
+      <div class="row">
+        <div class="col">
+          <span class="input textarea" ng-class="{ 'filled': optiona.focus || data.thingA.length > 0, 'onfocus': optiona.focus}">
+          <span class="fill-line"></span>
+          <label>Option A</label>
+          <textarea  
+                  type="text"
+                  name="optiona" 
+                  ng-model="data.thingA"
+                  ng-focus="optiona.focus = true"
+                  ng-blur="optiona.focus = false"
+                  required>
+          </textarea>
+          </span>
+        </div>
       </div>
-      <a class="item item-input">
-        <input type="text" ng-model="data.thingA" placeholder="A">
-      </a>
-    </div>
+      <div class="row">
+        <div class="col">
+          <span class="input textarea" ng-class="{ 'filled': optionb.focus || data.thingB.length > 0, 'onfocus': optionb.focus}">
+          <span class="fill-line"></span>
+          <label>Option B</label>
+          <textarea  
+                  type="text"
+                  name="optionb" 
+                  ng-model="data.thingB"
+                  ng-focus="optionb.focus = true"
+                  ng-blur="optionb.focus = false"
+                  required>
+          </textarea>
+        </div>
+      </div>
+    </form>
+  
 
-    <div class="card">
-      <div class="item item-divider">
-        Your second selection :
-      </div>
-      <a class="item item-input">
-        <input type="text" ng-model="data.thingB" placeholder="B">
-      </a>
-    </div>
-    <div class="card">
-      <div class="item item-divider">
-        Please enter all your tags :
-      </div>
-      <a class="item item-input">
-        <input ng-model="data.tags" type="text" placeholder="tags">
-      </a>
-    </div>
-    <div>
-    <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}" style="text-align: center">
-    </div>
-    <ion-button class="button button-balanced button-block" ng-click="submit()">Submit Which!</ion-button>
+  <div class="row">
 
-    <button class="button button-full button-positive" ng-click="getImage()">
-      Upload Images
+    <button class="button button-full button_main btn_lg" ng-click="show()">
+      Add An Image
     </button>
-
-    <button class="button button-full button-positive" ng-click="takePic()">Take a Photo</button>
-    
+  </div>
+  <div class="row">
+    <button class="button-full button_main button_outline btn_lg submit" ng-click="submit()" ng-disabled="createWhich.$invalid">Submit</button>
+  </div>
+  
   </ion-content>
 </ion-view>

@@ -293,3 +293,255 @@ swoosh-card .bottom p {
 #votes{
   font-size: 26px;
 }
+
+span.input {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 55px;
+  border-bottom: 2px solid #D9D9D9;
+  z-index: 1;
+  margin-bottom: 30px;
+}
+
+.input > span.fill-line {
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 100%;
+  height: 3px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.input.onfocus > span.fill-line {
+  right: 0px;
+  background: #4eb6c0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.input > input {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding-left: 10px;
+  border: none;
+  background: none;
+  font-style: 18px;
+  background: #eaeaea;
+}
+
+.input > input:focus {
+  outline: none;
+  border: none;
+  background: #eaeaea;
+}
+
+.input > label {
+  position: absolute;
+  top: 24px;
+  left: 0px;
+  color: #666;
+  font-weight: 600;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+
+
+.input.filled > label {
+  top: -5px;
+  left: 0px;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+
+.input.textarea.filled > label {
+  top: -20px;
+  left: 0px;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+
+
+.placeholder {
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  font-size: 16px;
+  color: #D8D8D8;
+}
+
+
+
+.panel {
+  background: #FFF;
+  border: 1px solid #D8D8D8;
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+  border-radius: 2px;
+  padding: 50px 0;
+}
+
+textarea {
+  top: 10px;
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  /*overflow: hidden;*/
+  resize: none;
+}
+
+/*Drop Downs
+
+/*select {
+  position: relative;
+  border: none;
+  height: 55px;
+  border-radius: 0;
+  background: transparent;
+  z-index: 100;
+}
+
+option {
+  padding: none !important;
+}
+
+select:focus {
+  outline: none;
+}*/
+.btn_lg {
+  height: 60px;
+}
+
+.button_main {
+  background: #1ea6cc;
+  border-color: #1ea6cc;
+  color: #FFF;
+}
+
+.button_main:active {
+  background: #066E8B;
+  border-color: #066E8B;
+}
+
+.button_main.activated {
+  background: #066E8B;
+  border-color: #066E8B;
+}
+
+.button_main.active {
+  background: #066E8B;
+  border-color: #066E8B;
+}
+
+
+
+.button_outline {
+  background: none;
+  border: 2px solid #1ea6cc;
+  color: #1ea6cc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+
+
+.button_outline:hover {
+  color: #1ea6cc !important;
+}
+
+.button_outline.submit:disabled {
+  border-color: #CCC !important;
+  color: #CCC !important;
+}
+
+.button_outline:active {
+  background: #1ea6cc;
+  border: 2px solid #1ea6cc;
+  color: #FFF !important;
+}
+
+
+
+.button_main:hover {
+  color: #FFF;
+}
+
+.modal {
+  background: rgba(0,0,0,0.3);
+  
+}
+
+.modal-content-wrapper {
+  background: transparent;
+  width: 100%;
+  height: 100%;
+
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.modal-content {
+  background: #FFF;
+  width: 90%;
+  height: auto;
+}
+
+.modal-content ul {
+  width: 100%;
+}
+
+.modal-content li {
+  height: 50px;
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+  width: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content li.header {
+  height: 100px;
+}
+
+/*.waves-effect {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  vertical-align: middle;
+  z-index: 1;
+  will-change: opacity, transform;
+  transition: all .3s ease-out;
+}*/
+
+.padding-top-50 {
+  padding-top: 50px;
+}
+
+
