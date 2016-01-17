@@ -32,21 +32,20 @@ angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'
 
   //This gets called when the user swipes, making a decision with the choice from the user
   $scope.decide = function(result) {
-    var letter = result[result.length -1].toLowerCase();
-    WhichFactory.choose(letter, $scope.data.which[0].id, $scope.data.username).then(function(votingResult) {
+    WhichFactory.choose(result, $scope.data.which[0].id, $scope.data.username).then(function(votingResult) {
 
       //Allows for state change, showing new view, second argument is the params being sent in to display results
       $state.go('app.result', {
         a: votingResult.votesForA,
         b: votingResult.votesForB,
-        choice: letter
+        choice: result
       });
     });
 
   };
 
   $scope.$on('discard', function(event, element, card) {
-    $scope.decide(card);
+    $scope.decide(letter);
   });
 });
 
