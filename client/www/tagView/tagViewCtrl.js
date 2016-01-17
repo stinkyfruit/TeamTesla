@@ -25,9 +25,12 @@ angular.module('which.controllers.tagView', ['which.factory', 'ionic.contrib.ui.
   };
 
   $scope.goToWhich = function(id) {
+    console.log(id);
     WhichFactory.getWhichByID(id).then(function(which) {
+      $scope.data.whiches = [];
+      $scope.data.popWhiches = [];
       var image = WhichFactory.defaultImage(which.imageURI);
-
+      console.log(which);
       $state.go('app.which', {
         id: which.id,
         question: which.question,

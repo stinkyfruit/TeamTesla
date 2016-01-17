@@ -3,17 +3,17 @@
  */
 angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'])
 
-.directive('noScroll', function($document) {
+// .directive('noScroll', function($document) {
 
-  return {
-    restrict: 'A',
-    link: function($scope, $element, $attr) {
-      $document.on('touchmove', function(e) {
-        e.preventDefault();
-      });
-    }
-  }
-})
+//   return {
+//     restrict: 'A',
+//     link: function($scope, $element, $attr) {
+//       $document.on('touchmove', function(e) {
+//         e.preventDefault();
+//       });
+//     }
+//   }
+// })
 
 .controller('WhichCtrl', function($scope, $timeout, $state, $stateParams, WhichFactory) {
   $scope.data = {
@@ -45,7 +45,15 @@ angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'
   };
 
   $scope.$on('discard', function(event, element, card) {
-    $scope.decide(letter);
+    $scope.decide(card);
+    $scope.data = {
+      
+    };
+  });
+  $scope.originalData = angular.copy($scope.data);
+
+  $scope.$on('clear', function(event, state) {
+      $scope.data = $scope.originalData;
   });
 });
 
