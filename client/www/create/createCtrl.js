@@ -32,6 +32,7 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
     tags: '',
     imageURI: ''
     }
+    $scope.imageDb = '';
     $state.go('app.whichesByUser');
   }
 

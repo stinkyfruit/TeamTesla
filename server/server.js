@@ -5,6 +5,8 @@ var express  = require('express'),
 var app = express();
 var port = process.env.PORT || 5007;
 var databaseLocation = 'mongodb://b:b@apollo.modulusmongo.net:27017/wymyrI3h';
+// 'mongodb://localhost/testdb';
+// 'mongodb://b:b@apollo.modulusmongo.net:27017/wymyrI3h';
 
 mongoose.connect(databaseLocation, function (err, res) {
   if (err) {

@@ -3,17 +3,17 @@
  */
 angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'])
 
-.directive('noScroll', function($document) {
+// .directive('noScroll', function($document) {
 
-  return {
-    restrict: 'A',
-    link: function($scope, $element, $attr) {
-      $document.on('touchmove', function(e) {
-        e.preventDefault();
-      });
-    }
-  }
-})
+//   return {
+//     restrict: 'A',
+//     link: function($scope, $element, $attr) {
+//       $document.on('touchmove', function(e) {
+//         e.preventDefault();
+//       });
+//     }
+//   }
+// })
 
 .controller('WhichCtrl', function($scope, $timeout, $state, $stateParams, WhichFactory) {
   $scope.data = {
@@ -32,16 +32,13 @@ angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'
 
   //This gets called when the user swipes, making a decision with the choice from the user
   $scope.decide = function(result) {
-    console.log($scope.data.which[0].imageURI, 'decided');
-    var letter = result[result.length -1].toLowerCase();
-    var choice = $scope.data.which[0][result];
-    WhichFactory.choose(choice, $scope.data.which[0].id, $scope.data.username).then(function(votingResult) {
+    WhichFactory.choose(result, $scope.data.which[0].id, $scope.data.username).then(function(votingResult) {
 
       //Allows for state change, showing new view, second argument is the params being sent in to display results
       $state.go('app.result', {
         a: votingResult.votesForA,
         b: votingResult.votesForB,
-        choice: letter
+        choice: result
       });
     });
 
@@ -49,6 +46,14 @@ angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'
 
   $scope.$on('discard', function(event, element, card) {
     $scope.decide(card);
+    $scope.data = {
+      
+    };
+  });
+  $scope.originalData = angular.copy($scope.data);
+
+  $scope.$on('clear', function(event, state) {
+      $scope.data = $scope.originalData;
   });
 });
 

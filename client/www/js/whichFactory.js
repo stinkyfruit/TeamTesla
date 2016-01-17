@@ -10,6 +10,8 @@ angular.module('which.factory', [])
   $http.defaults.headers.common.Authorization = 'Bearer' + token;
 
   var serverURI = 'http://secure-castle-2561.herokuapp.com';
+//   'http://localhost:5007';
+// 'http://secure-castle-2561.herokuapp.com';
 
 
   var defaultImage = function(image){
@@ -50,8 +52,10 @@ angular.module('which.factory', [])
         }
       })
       .then(function(res) {
+        console.log('positive');
         return res.data;
       }, function(err) {
+        console.log('negative');
         return err;
       });
   }
@@ -91,13 +95,17 @@ angular.module('which.factory', [])
 
   var getMostPopularWhiches = function(){
     return $http.get(serverURI + '/api/tag/mostPop', {
+      params: {
+          userID: window.localStorage.getItem('which.userToken'),
+          resultLimit: 100
+        }
       })
-    .then(function(res){
-      console.log('most pop response data', res.data);
-      return res.data;
-    }, function(err){
-      return err;
-    });
+      .then(function(res){
+        console.log('most pop response data', res.data);
+        return res.data;
+      }, function(err){
+        return err;
+      });
   };
 
   /*
