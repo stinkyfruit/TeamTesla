@@ -14,7 +14,7 @@ angular.module('which.factory', [])
 
   var defaultImage = function(image){
    if(image.length === 0){
-      return 'http://c4.staticflickr.com/4/3924/18886530069_840bc7d2a5_m.jpg';
+      return 'http://cristinaistrati.com/uploads/default/2013/07/which-way-to-go.jpg';
     } else {
       return "data:image/jpeg;base64," + image;
     }
