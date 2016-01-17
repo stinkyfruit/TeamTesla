@@ -18,10 +18,10 @@ angular.module('which.controllers.whichInfoCtrl', ['which.factory', 'ionic.swoos
     $state.go('app.whichesByUser');
   }
 
-  // $scope.originalData = angular.copy($scope.data);
+  $scope.originalData = angular.copy($scope.data);
 
-  // $scope.$on('clear', function(event, state) {
-  //   if (state === 'app.whichesByUser')
-  //     $scope.data = {};
-  // });
+  $scope.$on('clear', function(event, state) {
+    if (state === 'app.whichesByUser')
+      $scope.data = angular.copy($scope.originalData);
+  });
 });
