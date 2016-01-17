@@ -16,7 +16,7 @@ angular.module('which.controllers.whichesByUser', ['which.factory', 'ionic.contr
 
   $scope.goToWhich = function(id) {
     WhichFactory.getWhichByID(id).then(function(which) {
-      console.log(which);
+      which.imageURI = WhichFactory.defaultImage(which.imageURI);
       $state.go('app.whichInfo', {which: which});
     })
   }

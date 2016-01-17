@@ -50,11 +50,14 @@ angular.module('which.controllers.app', ['which.factory','ionic','ionic.contrib.
     };
     $scope.startWhiches = function(){
       WhichFactory.getNew().then(function(which) {
+        var randomWhich = $scope.getRandomWhich(which);
+        randomWhich.imageURI = WhichFactory.defaultImage(randomWhich.imageURI);
         $state.go('app.which', {
-          id: $scope.getRandomWhich(which).id,
-          question: $scope.getRandomWhich(which).question,
-          thingA: $scope.getRandomWhich(which).thingA,
-          thingB: $scope.getRandomWhich(which).thingB
+          id: randomWhich.id,
+          question: randomWhich.question,
+          thingA: randomWhich.thingA,
+          thingB: randomWhich.thingB,
+          imageURI: randomWhich.imageURI
           //tags: which.tags
         });
         $scope.modal.hide();

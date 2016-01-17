@@ -12,6 +12,13 @@ angular.module('which.factory', [])
   var serverURI = 'http://secure-castle-2561.herokuapp.com';
 
 
+  var defaultImage = function(image){
+   if(image.length === 0){
+      return 'http://cristinaistrati.com/uploads/default/2013/07/which-way-to-go.jpg';
+    } else {
+      return "data:image/jpeg;base64," + image;
+    }
+  }
   /*
    * choose function is called after a decision has been made.
    * Sends an HTTP POST request to /api/which/{{id}}/judge.
@@ -131,6 +138,7 @@ angular.module('which.factory', [])
     getWhichesByTag: getWhichesByTag,
     getWhichByID: getWhichByID,
     getWhichesByUser : getWhichesByUser,
-    getMostPopularWhiches: getMostPopularWhiches
+    getMostPopularWhiches: getMostPopularWhiches,
+    defaultImage: defaultImage
   }
 });
