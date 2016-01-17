@@ -24,8 +24,7 @@ angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'
       question: $stateParams.question,
       thingA: $stateParams.thingA,
       thingB: $stateParams.thingB,
-      imageURI: 'http://c4.staticflickr.com/4/3924/18886530069_840bc7d2a5_m.jpg',
-      // imageURI: "data:image/jpeg;base64," + $stateParams.imageURI
+      imageURI: $stateParams.imageURI
     }],
   
   };
@@ -33,6 +32,7 @@ angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'
 
   //This gets called when the user swipes, making a decision with the choice from the user
   $scope.decide = function(result) {
+    console.log($scope.data.which[0].imageURI, 'decided');
     var letter = result[result.length -1].toLowerCase();
     var choice = $scope.data.which[0][result];
     WhichFactory.choose(choice, $scope.data.which[0].id, $scope.data.username).then(function(votingResult) {
