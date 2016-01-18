@@ -37,7 +37,7 @@ angular.module('which.controllers.tagView', ['which.factory', 'ionic.contrib.ui.
         thingA: which.thingA,
         thingB: which.thingB,
         imageURI: image,
-        report: which.report //REPORT added
+
       });
     })
   }

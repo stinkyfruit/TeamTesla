@@ -25,8 +25,7 @@ angular.module('which.controllers.result', ['which.factory', 'ionic.contrib.ui.t
             question: randomWhich.question,
             thingA: randomWhich.thingA,
             thingB: randomWhich.thingB,
-            imageURI: randomWhich.imageURI,
-            report: randomWhich.report
+            imageURI: randomWhich.imageURI
             //tags: which.tags
           });
         }

@@ -22,7 +22,6 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
       thingA: $scope.data.thingA,
       thingB: $scope.data.thingB,
       imageURI: $scope.imageDb,
-      report: 0
     }
 
     WhichFactory.submit(which);

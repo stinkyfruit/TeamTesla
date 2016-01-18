@@ -14,8 +14,9 @@ angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'
 //     }
 //   }
 // })
-
+ 
 .controller('WhichCtrl', function($scope, $timeout, $state, $stateParams, WhichFactory) {
+  $scope.reported = false;
   $scope.data = {
     username: window.localStorage.getItem('which.userToken'),
     activeSlide: 1,
@@ -24,14 +25,14 @@ angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'
       question: $stateParams.question,
       thingA: $stateParams.thingA,
       thingB: $stateParams.thingB,
-      imageURI: $stateParams.imageURI,
-      report: $stateParams.report
+      imageURI: $stateParams.imageURI
     },
   };
 
-
+ 
   //This gets called when the user swipes, making a decision with the choice from the user
   $scope.decide = function(result) {
+    $scope.reported = false;
     WhichFactory.choose(result, $scope.data.which.id, $scope.data.username).then(function(votingResult) {
 
       //Allows for state change, showing new view, second argument is the params being sent in to display results
@@ -43,23 +44,19 @@ angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'
     });
   }
 
-  $scope.doSomething = function(){
-    console.log('INSIDE WHICH CTRL');
-    console.log($scope.data.which.report);
-
-    //set curret report number
-    currentReport = $scope.data.which.report;
-    console.log(currentReport);
-  }
-
+  
   //reportWhich is called when user presses report button, and will increment the report status
   $scope.reportWhich = function(){
-    console.log('INSIDE WHICH CTRL');
-    console.log($scope.data.which);
     //pass in the which, the id of which
-    WhichFactory.reporting($scope.data.which).then(function(){
-      console.log('SENT');
-    });
+    if(!$scope.reported){
+      WhichFactory.reporting($scope.data.which).then(function(){
+        console.log('reported the which');
+      });
+      $scope.reported = true;
+    } else {
+      console.log('you already reported this');
+    }
+   
   }
 
 
