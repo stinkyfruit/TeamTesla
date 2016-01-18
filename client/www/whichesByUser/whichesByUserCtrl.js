@@ -6,13 +6,16 @@ angular.module('which.controllers.whichesByUser', ['which.factory', 'ionic.contr
     whiches: []
   }
   $scope.$on('$ionicView.afterEnter', function() {
-
     WhichFactory.getWhichesByUser().then(function (whiches) {
       $scope.data.whiches = whiches;
     
     });
   });
 
+  
+  $scope.delete = function(id) {
+    console.log("delete item with the id of--", id);
+  }
 
   $scope.goToWhich = function(id) {
     WhichFactory.getWhichByID(id).then(function(which) {
