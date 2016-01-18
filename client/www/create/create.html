@@ -1,5 +1,14 @@
 <ion-view view-title="Create">
-  <ion-content class="padding padding-top-50">
+  <ion-content>
+    <section class="add_image" ng-click="show()">
+      <i class="ion-android-camera" ng-hide="imageAdded === true"></i>
+      <span class="title" ng-hide="imageAdded === true">CLICK TO ADD IMAGE</span>
+      <img ng-src="{{imgURI}}" ng-show="imageAdded === true">
+    </section>
+
+    
+
+
     <form name="createWhich">
       <div class="row">
         <div class="col">
@@ -53,12 +62,12 @@
 
   <div class="row">
 
-    <button class="button button-full button_main btn_lg" ng-click="show()">
+    <!-- <button class="button button-full button_main btn_lg" ng-click="show()">
       Add An Image
-    </button>
+    </button> -->
   </div>
   <div class="row">
-    <button class="button-full button_main button_outline btn_lg submit" ng-click="submit()" ng-disabled="createWhich.$invalid">Submit</button>
+    <button class="button-full button_main button_outline btn_lg submit" ng-click="submit()" ng-disabled="createWhich.$invalid">Create Which</button>
   </div>
   
   </ion-content>

@@ -544,4 +544,36 @@ select:focus {
   padding-top: 50px;
 }
 
+/*Add image*/
 
+.add_image {
+  background: #eee;
+  min-height: 300px;
+  width: 100%;
+  text-align: center;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.add_image i {
+  display: block;
+  font-size: 32px;
+  color: #BDBDBD;
+}
+
+.add_image > .title {
+  display: block;
+  font-size: 12px;
+  color: #BDBDBD;
+} 
+
+.add_image img {
+  width: 100%;
+}
