@@ -61,6 +61,8 @@ angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'
 
   //reportWhich is called when user presses report button, and will increment the report status
   $scope.reportWhich = function(){
+    console.log('INSIDE WHICH CTRL');
+    console.log($scope.data.which);
     //pass in the which, the id of which
     WhichFactory.reporting($scope.data.which[0]).then(function(){
       console.log('SENT');
