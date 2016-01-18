@@ -30,7 +30,9 @@ angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'
   };
 
  
-  //This gets called when the user swipes, making a decision with the choice from the user
+  /* This gets called when the user swipes, 
+   * making a decision with the choice from the user
+  **/
   $scope.decide = function(result) {
     $scope.reported = false;
     WhichFactory.choose(result, $scope.data.which.id, $scope.data.username).then(function(votingResult) {
@@ -42,10 +44,12 @@ angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'
         choice: result
       });
     });
-  }
+  };
 
   
-  //reportWhich is called when user presses report button, and will increment the report status
+  /* reportWhich is called when user presses report button, 
+   * and will increment the report status
+  **/
   $scope.reportWhich = function(){
     //pass in the which, the id of which
     if(!$scope.reported){
@@ -57,28 +61,13 @@ angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'
       console.log('you already reported this');
     }
    
-  }
-
+  };
+  /* when skip button is clicked, this will skip the which, but the skipped which
+   * will come back randomly until voted on or skipped again
+  **/
   $scope.skipWhich = function(){
-    WhichFactory.getNew().then(function(which) {
-
-      if(which.length === 0){
-        console.log('no more whiches');
-        $state.go('app.tagView');
-      } else {        
-        var randomWhich = $scope.getRandomWhich(which);
-        randomWhich.imageURI = WhichFactory.defaultImage(randomWhich.imageURI);
-        $state.go('app.which', {
-          id: randomWhich.id,
-          question: randomWhich.question,
-          thingA: randomWhich.thingA,
-          thingB: randomWhich.thingB,
-          imageURI: randomWhich.imageURI
-          //tags: which.tags
-        });
-      }
-    });    
-  }
+    WhichFactory.getNewWhich();
+  };
 
 
 
