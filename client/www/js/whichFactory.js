@@ -3,7 +3,7 @@
  */
 angular.module('which.factory', [])
 
-.factory('WhichFactory', function($http) {
+.factory('WhichFactory', function($http, $state) {
 
   var token = 'someRandomString';
 
@@ -12,7 +12,7 @@ angular.module('which.factory', [])
 
   var serverURI = 'http://secure-castle-2561.herokuapp.com';
   //var serverURI = 'http://localhost:5007'
-// 'http://secure-castle-2561.herokuapp.com';
+  //'http://secure-castle-2561.herokuapp.com';
 
 
 
@@ -22,14 +22,14 @@ angular.module('which.factory', [])
     } else {
       return "data:image/jpeg;base64," + image;
     }
-  }
+  };
   /*
    * choose function is called after a decision has been made.
    * Sends an HTTP POST request to /api/which/{{id}}/judge.
    * TODO : Send a response back with the results object.
    **/
   var choose = function(choice, id, username) {
-    //choice === a || b
+
     var uri = serverURI + '/api/which/' + id + '/judge';
 
     return $http.post(uri, {
@@ -41,10 +41,11 @@ angular.module('which.factory', [])
       }, function(err) {
         return err;
       });
-  }
+  };
 
-  // reporting function to update report count
-  // SENDS a HTTP POST request to  
+  /* reporting function to update report count
+   * SENDS a HTTP POST request to  
+  **/
   var reporting = function(whichObj){
     var uri  = serverURI + '/api/which/' + whichObj.id + '/report';
     //$http post shortcut method takes in a url and request data
@@ -54,12 +55,13 @@ angular.module('which.factory', [])
       }, function(err) {
         return err;
       });
-  }
+  };
 
 
   /*
    * getNew function is called to retrieve the next available which.
    * Sends an HTTP GET request to /api/which
+   * Utilized in the getNewWhich function below
    **/
   var getNew = function() {
     return $http.get(serverURI + '/api/which', {
@@ -72,7 +74,7 @@ angular.module('which.factory', [])
       }, function(err) {
         return err;
       });
-  }
+  };
 
   /*
    * submit function is called to submit a new Which
@@ -86,7 +88,7 @@ angular.module('which.factory', [])
       }, function(err) {
         return err;
       });
-  }
+  };
 
   /*
    * Gets all the whiches with a certain tag
@@ -100,7 +102,6 @@ angular.module('which.factory', [])
         }
       })
       .then(function(res) {
-        console.log('by tag response data', res.data);
         return res.data;
       }, function(err) {
         return err;
@@ -115,7 +116,6 @@ angular.module('which.factory', [])
         }
       })
       .then(function(res){
-        console.log('most pop response data', res.data);
         return res.data;
       }, function(err){
         return err;
@@ -151,7 +151,7 @@ angular.module('which.factory', [])
       }, function(err) {
         return err;
       });
-  }
+  };
 
   var deleteWhichById = function (id) {
     return $http.post(serverURI + '/api/which/delete/' + id)
@@ -159,8 +159,40 @@ angular.module('which.factory', [])
         return res.data;
       }, function (err) {
         return err;
-      })
-  }
+      });
+  };
+
+  /*
+   * Generating random array value
+   **/
+  var getRandomWhich = function(array){
+    return array[Math.floor(Math.random()*array.length)];
+  };
+
+  /*
+   * gets array of all whiches in database, 
+   * and then picks one based on randomizer
+  **/
+  var getNewWhich = function(){
+    getNew().then(function(which) {
+
+      if(which.length === 0){
+        $state.go('app.tagView');
+      } else {
+        var randomWhich = getRandomWhich(which);
+        randomWhich.imageURI = randomWhich.imageURI;
+        $state.go('app.which', {
+          id: randomWhich.id,
+          question: randomWhich.question,
+          thingA: randomWhich.thingA,
+          thingB: randomWhich.thingB,
+          imageURI: randomWhich.imageURI
+          //tags: which.tags
+        });
+      }
+    });
+  };
+
 
   return {
     choose: choose,
@@ -172,6 +204,7 @@ angular.module('which.factory', [])
     getWhichesByUser : getWhichesByUser,
     getMostPopularWhiches: getMostPopularWhiches,
     defaultImage: defaultImage,
-    deleteWhichById: deleteWhichById
-  }
+    deleteWhichById: deleteWhichById,
+    getNewWhich: getNewWhich
+  };
 });
