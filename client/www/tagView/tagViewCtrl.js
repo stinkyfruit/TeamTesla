@@ -26,13 +26,14 @@ angular.module('which.controllers.tagView', ['which.factory', 'ionic.contrib.ui.
 
   $scope.goToWhich = function(id) {
     WhichFactory.getWhichByID(id).then(function(which) {
-      console.log(which);
+      console.log('tagview', which);
       $state.go('app.which', {
         id: which.id,
         question: which.question,
         thingA: which.thingA,
         thingB: which.thingB,
-        imageURI: which.imageURI
+        imageURI: which.imageURI,
+        report: which.report //REPORT added
       });
     })
   }

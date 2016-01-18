@@ -18,7 +18,8 @@ angular.module('which.controllers.result', ['which.factory', 'ionic.contrib.ui.t
           id: which[0].id,
           question: which[0].question,
           thingA: which[0].thingA,
-          thingB: which[0].thingB
+          thingB: which[0].thingB,
+          report: which[0].report
           //tags: which.tags
         });
       });

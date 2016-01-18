@@ -54,8 +54,9 @@ angular.module('which.controllers.app', ['which.factory','ionic','ionic.contrib.
           id: which[0].id,
           question: which[0].question,
           thingA: which[0].thingA,
-          thingB: which[0].thingB
+          thingB: which[0].thingB,
           //tags: which.tags
+          report: which[0].report
         });
         $scope.modal.hide();
       }); 

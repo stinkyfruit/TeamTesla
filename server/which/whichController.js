@@ -163,7 +163,9 @@ module.exports = {
       type : data.type,
       thingA : data.thingA, // either string of text, or url to resource
       thingB : data.thingB,
-      imageURI: data.imageURI // a string 64bit
+      imageURI: data.imageURI, // a string 64bit
+      report: 0 //initialize report to be 0
+
     };
 
     Which(newWhich).save()
@@ -208,6 +210,27 @@ module.exports = {
           res.json(clientResults);
         }
       })
+      .catch(function(err){
+        throw err;
+      });
+  },
+
+  reportWhich: function (req, res, next) {
+    var whichID  = req.body.whichID;
+    console.log(whichID);
+    var query = {_id: whichID};
+
+    Which.findOneAndUpdate(query, {$inc: {report: 1}})
+      .then(function(dbResults){
+          if (!dbResults) {
+            res.sendStatus(409)
+          } else {
+            var results = {
+              reporting: dbResults.reporting
+            }
+            res.json(results);
+          }
+    })
       .catch(function(err){
         throw err;
       });
