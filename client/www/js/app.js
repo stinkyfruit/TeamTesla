@@ -61,10 +61,13 @@ angular.module('which', ['ionic',
     url: '/which',
     params: {
       id: '1',
+
       question: "default",
       thingA: "A",
       thingB: "B",
-      imageURI: ''
+      imageURI: '',
+      report: 5
+
     },
     views: {
       'menuContent': {

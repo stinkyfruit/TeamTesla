@@ -24,9 +24,9 @@ angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'
       question: $stateParams.question,
       thingA: $stateParams.thingA,
       thingB: $stateParams.thingB,
-      imageURI: $stateParams.imageURI
+      imageURI: $stateParams.imageURI,
+      report: $stateParams.report
     },
-  
   };
 
 
@@ -41,8 +41,28 @@ angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'
         choice: result
       });
     });
+  }
 
-  };
+  $scope.doSomething = function(){
+    console.log('INSIDE WHICH CTRL');
+    console.log($scope.data.which.report);
+
+    //set curret report number
+    currentReport = $scope.data.which.report;
+    console.log(currentReport);
+  }
+
+  //reportWhich is called when user presses report button, and will increment the report status
+  $scope.reportWhich = function(){
+    console.log('INSIDE WHICH CTRL');
+    console.log($scope.data.which);
+    //pass in the which, the id of which
+    WhichFactory.reporting($scope.data.which).then(function(){
+      console.log('SENT');
+    });
+  }
+
+
 
   $scope.$on('discard', function(event, element, card) {
     $scope.decide(card);

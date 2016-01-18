@@ -51,7 +51,8 @@ var defaultWhichProperties = function (dbResults) {
     tags : 'tags',
     votesFrom : 'votesFrom',
     createdAt: 'createdAt',
-    imageURI: 'imageURI'
+    imageURI: 'imageURI',
+    report: 'report'
   };
   return selectProperties(dbResults, defaultProps);
 };
