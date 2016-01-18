@@ -59,6 +59,27 @@ angular.module('which.controllers.which', ['which.factory', 'ionic.swoosh.cards'
    
   }
 
+  $scope.skipWhich = function(){
+    WhichFactory.getNew().then(function(which) {
+
+      if(which.length === 0){
+        console.log('no more whiches');
+        $state.go('app.tagView');
+      } else {        
+        var randomWhich = $scope.getRandomWhich(which);
+        randomWhich.imageURI = WhichFactory.defaultImage(randomWhich.imageURI);
+        $state.go('app.which', {
+          id: randomWhich.id,
+          question: randomWhich.question,
+          thingA: randomWhich.thingA,
+          thingB: randomWhich.thingB,
+          imageURI: randomWhich.imageURI
+          //tags: which.tags
+        });
+      }
+    });    
+  }
+
 
 
   $scope.$on('discard', function(event, element, card) {
