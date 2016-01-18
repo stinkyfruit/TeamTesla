@@ -9,7 +9,7 @@ angular.module('user.factory', [])
 
 
   var apiUrl = 'http://secure-castle-2561.herokuapp.com';
-// 'http://localhost:5007'
+  //var apiUrl = 'http://localhost:5007'
 // 'http://secure-castle-2561.herokuapp.com';
 
   /*

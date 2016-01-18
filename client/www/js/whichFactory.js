@@ -11,7 +11,7 @@ angular.module('which.factory', [])
 
 
   var serverURI = 'http://secure-castle-2561.herokuapp.com';
-//   'http://localhost:5007';
+  //var serverURI = 'http://localhost:5007'
 // 'http://secure-castle-2561.herokuapp.com';
 
 
@@ -153,6 +153,15 @@ angular.module('which.factory', [])
       });
   }
 
+  var deleteWhichById = function (id) {
+    return $http.post(serverURI + '/api/which/delete/' + id)
+      .then(function (res) {
+        return res.data;
+      }, function (err) {
+        return err;
+      })
+  }
+
   return {
     choose: choose,
     getNew: getNew,
@@ -162,6 +171,7 @@ angular.module('which.factory', [])
     getWhichByID: getWhichByID,
     getWhichesByUser : getWhichesByUser,
     getMostPopularWhiches: getMostPopularWhiches,
-    defaultImage: defaultImage
+    defaultImage: defaultImage,
+    deleteWhichById: deleteWhichById
   }
 });

@@ -255,4 +255,13 @@ module.exports = {
         throw err;
       });
   },
+
+  deleteWhich: function (req, res, next) {
+    var id = req.params.id;
+    Which.findById(id).remove(function (err){
+      if (err) return res.send(err);
+      return res.send("deleted");
+    });
+
+  }
 };
