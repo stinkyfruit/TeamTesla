@@ -1,9 +1,9 @@
 <ion-view view-title="My Whiches">
   <ion-content >
     <ion-list>
-      <ion-item ng-repeat="which in data.whiches" ng-click="goToWhich(which.id)" show-delete="false" can-swipe="true">
+      <ion-item ng-repeat="which in data.whiches" ng-click="goToWhich(which.id)" can-swipe="true">
         {{which.question}} <!-- - {{which.createdAt}} -->
-        <ion-option-button class="button-assertive icon ion-trash-a"></ion-option-button>
+        <ion-option-button class="button-assertive icon ion-trash-a" ng-click="delete(which.id)"></ion-option-button>
       </ion-item>
     </ion-list>
   </ion-content>
