@@ -15,6 +15,7 @@ module.exports = function (apiRouter) {
   apiRouter.post('/which/:whichID/judge', whichController.judgeWhich);
   apiRouter.post('/which/:whichID/tag',   whichController.tagWhich);
   apiRouter.post('/which/:whichID/report', whichController.reportWhich);
+  apiRouter.post('/which/delete/:id', whichController.deleteWhich);
 
   apiRouter.get('/tag/mostPop', whichController.getMostPopularWhiches);
 
