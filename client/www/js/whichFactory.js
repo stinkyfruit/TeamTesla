@@ -9,9 +9,11 @@ angular.module('which.factory', [])
 
   $http.defaults.headers.common.Authorization = 'Bearer' + token;
 
+
   var serverURI = 'http://secure-castle-2561.herokuapp.com';
 //   'http://localhost:5007';
 // 'http://secure-castle-2561.herokuapp.com';
+
 
 
   var defaultImage = function(image){
@@ -40,6 +42,20 @@ angular.module('which.factory', [])
         return err;
       });
   }
+
+  // reporting function to update report count
+  // SENDS a HTTP POST request to  
+  var reporting = function(whichObj){
+    var uri  = serverURI + '/api/which/' + whichObj.id + '/report';
+    //$http post shortcut method takes in a url and request data
+    return $http.post(uri, {
+      }).then(function(res){
+        return res.data;
+      }, function(err) {
+        return err;
+      });
+  }
+
 
   /*
    * getNew function is called to retrieve the next available which.
@@ -141,6 +157,7 @@ angular.module('which.factory', [])
     choose: choose,
     getNew: getNew,
     submit: submit,
+    reporting: reporting,
     getWhichesByTag: getWhichesByTag,
     getWhichByID: getWhichByID,
     getWhichesByUser : getWhichesByUser,

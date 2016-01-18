@@ -7,11 +7,13 @@ angular.module('which.controllers.afterCreate', ['which.factory', 'ionic.contrib
     $scope.getNewWhich = function() {
       WhichFactory.getNew().then(function(which) {
         $state.go('app.which', {
+
           id: $scope.getRandomWhich(which).id,
           question: $scope.getRandomWhich(which).question,
           thingA: $scope.getRandomWhich(which).thingA,
           thingB: $scope.getRandomWhich(which).thingB,
-          imageURI: $scope.getRandomWhich(which).imageURI
+          imageURI: $scope.getRandomWhich(which).imageURI,
+          report: $scope.getRandomWhich(which).report
           //tags: which.tags
         });
       });

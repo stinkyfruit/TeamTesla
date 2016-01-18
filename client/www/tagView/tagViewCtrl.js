@@ -30,13 +30,14 @@ angular.module('which.controllers.tagView', ['which.factory', 'ionic.contrib.ui.
       $scope.data.whiches = [];
       $scope.data.popWhiches = [];
       var image = WhichFactory.defaultImage(which.imageURI);
-      console.log(which);
+
       $state.go('app.which', {
         id: which.id,
         question: which.question,
         thingA: which.thingA,
         thingB: which.thingB,
-        imageURI: image
+        imageURI: image,
+        report: which.report //REPORT added
       });
     })
   }
