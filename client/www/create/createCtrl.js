@@ -10,6 +10,7 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
     imageURI: ''
   }
 
+  $scope.imageAdded = false;
 
   //Submission of Which with input details
   $scope.submit = function() {
@@ -69,16 +70,14 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
         targetWidth:500,
         targetHeight: 500,
         popoverOptions: CameraPopoverOptions,
-        saveToPhotoAlbum: false
+        saveToPhotoAlbum: false,
+        correctOrientation: true
       };
 
         $cordovaCamera.getPicture(options).then(function (imageData) {
             $scope.imgURI = "data:image/jpeg;base64," + imageData;
             $scope.imageDb = imageData;
-            setTimeout(function () {
-              $ionicScrollDelegate.resize()
-            },0)
-            
+            $scope.imageAdded = true;      
         }, function (err) {
 
             // An error occured. Show a message to the user
@@ -94,18 +93,19 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
         quality: 75,
         destinationType: Camera.DestinationType.DATA_URL,
         sourceType: Camera.PictureSourceType.CAMERA,
-        allowEdit: false,
+        allowEdit: true,
         encodingType: Camera.EncodingType.JPEG,
         targetWidth: 500,
         targetHeight: 500,
         popoverOptions: CameraPopoverOptions,
-        saveToPhotoAlbum: false
+        saveToPhotoAlbum: false,
+        correctOrientation: true
       };
 
         $cordovaCamera.getPicture(options).then(function (imageData) {
             $scope.imgURI = "data:image/jpeg;base64," + imageData;
             $scope.imageDb = imageData;
-            $ionicScrollDelegate.resize();
+            $scope.imageAdded = true;
         }, function (err) {
             // An error occured. Show a message to the user
         });
@@ -152,7 +152,8 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
    var hideSheet = $ionicActionSheet.show({
      buttons: [
        { text: 'Use Camera' },
-       { text: 'From Gallery' }
+       { text: 'From Gallery' },
+       { text: 'Delete Photo'}
      ],
      titleText: 'Upload a Photo',
      cancelText: 'Cancel',
@@ -162,8 +163,12 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
      buttonClicked: function(index) {
        if (index === 0 ) {
         $scope.takePic();
-       } else {
+       } else if (index === 1 ){
         $scope.getImage();
+       } else {
+        $scope.imageDb = '';
+        $scope.imageAdded = false;
+        $scope.imgURI = '';
        }
        return true;
      }
