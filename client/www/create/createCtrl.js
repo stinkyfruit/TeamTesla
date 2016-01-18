@@ -20,7 +20,8 @@ angular.module('which.controllers.create', ['which.factory', 'ionic.contrib.ui.t
       tags: $scope.data.tags.split(' '),
       thingA: $scope.data.thingA,
       thingB: $scope.data.thingB,
-      imageURI: $scope.imageDb
+      imageURI: $scope.imageDb,
+      report: 0
     }
 
     WhichFactory.submit(which);

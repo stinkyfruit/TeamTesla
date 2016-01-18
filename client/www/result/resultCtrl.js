@@ -13,6 +13,7 @@ angular.module('which.controllers.result', ['which.factory', 'ionic.contrib.ui.t
     //Function displays new which, calling the getNew factory function, and navigating to which page along with the newest which.
     $scope.getNewWhich = function() {
       WhichFactory.getNew().then(function(which) {
+
         if(which.length === 0){
           console.log('no more whiches');
           $state.go('app.tagView');
@@ -24,7 +25,8 @@ angular.module('which.controllers.result', ['which.factory', 'ionic.contrib.ui.t
             question: randomWhich.question,
             thingA: randomWhich.thingA,
             thingB: randomWhich.thingB,
-            imageURI: randomWhich.imageURI
+            imageURI: randomWhich.imageURI,
+            report: randomWhich.report
             //tags: which.tags
           });
         }
