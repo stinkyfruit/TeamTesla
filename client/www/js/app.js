@@ -1,12 +1,10 @@
 angular.module('which', ['ionic',
-  'which.controllers.afterCreate',
   'which.controllers.login',
   'which.controllers.app',
   'which.controllers.create',
   'which.controllers.result',
   'which.controllers.tagView',
   'which.controllers.which',
-  'which.controllers.whichSwoosh',
   //TESTING
   'which.controllers.whichcopy',
   'which.controllers.signUp',
@@ -71,17 +69,6 @@ angular.module('which', ['ionic',
         templateUrl: 'which/which.html',
         controller: 'WhichCtrl'
       }
-    }
-  })
-
-  .state('app.whichSwoosh', {
-    url: '/whichSwoosh',
-    views:{
-      'menuContent':{
-        templateUrl: 'which/whichSwoosh.html',
-        controller: 'CardsCtrl'
-      }
-     
     }
   })
   //TESTING WHICH COPY
