@@ -61,13 +61,10 @@ angular.module('which', ['ionic',
     url: '/which',
     params: {
       id: '1',
-
       question: "default",
       thingA: "A",
       thingB: "B",
-      imageURI: '',
-      report: 5
-
+      imageURI: ''
     },
     views: {
       'menuContent': {
@@ -122,17 +119,6 @@ angular.module('which', ['ionic',
       'menuContent': {
         templateUrl: 'create/create.html',
         controller: 'CreateCtrl'
-      }
-    }
-  })
-
-  //State for after a Which has been created. Provides confirmation to the user that the Which has been created.
-  .state('app.afterCreate', {
-    url: '/afterCreate',
-    views: {
-      'menuContent': {
-        templateUrl: 'afterCreate/afterCreate.html',
-        controller: 'AfterCreateCtrl'
       }
     }
   })

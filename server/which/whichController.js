@@ -214,7 +214,6 @@ module.exports = {
 
   reportWhich: function (req, res, next) {
     var whichID  = req.body.whichID;
-    console.log(whichID);
     var query = {_id: whichID};
 
     Which.findOneAndUpdate(query, {$inc: {report: 1}})

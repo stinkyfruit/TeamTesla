@@ -3,18 +3,13 @@ var express  = require('express'),
     mongoose.Promise = require('bluebird');
 
 var app = express();
-<<<<<<< HEAD
+
 var port = process.env.PORT || 5007;
-var databaseLocation = 'mongodb://c:c1d2@apollo.modulusmongo.net:27017/zIg4upod'
+var databaseLocation = 'mongodb://c:c1d2@apollo.modulusmongo.net:27017/zIg4upod';
 
 // 'mongodb://c:c1d2@apollo.modulusmongo.net:27017/zIg4upod'
 // 'mongodb://localhost/testdb';
-=======
-// var port = process.env.PORT || 5007;
-// var databaseLocation = 'mongodb://z:z@apollo.modulusmongo.net:27017/rib8yZeh';
-var port = 3000;
-var databaseLocation = 'mongodb://localhost/testdb';
->>>>>>> workingreport
+
 
 
 mongoose.connect(databaseLocation, function (err, res) {
