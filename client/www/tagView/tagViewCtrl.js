@@ -10,10 +10,23 @@ angular.module('which.controllers.tagView', ['which.factory', 'ionic.contrib.ui.
   };
 
   $scope.getWhichesByTag = function() {
+    $scope.data.whiches = [];
+    var obj = {};
+
     if ($scope.data.tagSearch !== '') {
       WhichFactory.getWhichesByTag($scope.data.tagSearch).then(function(whiches) {
-        $scope.data.whiches = whiches;
-
+        var searchWord = $scope.data.tagSearch.toLowerCase().split(' ');
+        searchWord.forEach(function(word){
+          whiches.forEach(function(which){
+            var question = which.question.toLowerCase().split(' ');
+            if(question.indexOf(word)!== -1){
+              obj[question] = which;
+            }
+          }) 
+        })
+        for(var key in obj){
+          $scope.data.whiches.push(obj[key]);
+        }
       });
     }
   };

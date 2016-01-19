@@ -16,13 +16,14 @@
 
 
 <ion-list>
+  Search Results:
   <ion-item ng-repeat="which in data.whiches" ng-click="goToWhich(which.id)">
     {{which.question}}
   </ion-item>
 </ion-list>
 
 <ion-list>
-
+  Top 5 most popular:
   <ion-item ng-repeat="which in data.popWhiches" ng-click="goToWhich(which.id)">
     {{which.question}} {{which.totalVoteCount}}
   </ion-item>
