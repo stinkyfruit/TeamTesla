@@ -78,8 +78,8 @@ module.exports = {
 
     var dbQuery = buildDefaultWhichQuery(req);
     var resultLimit = Number(req.query.resultLimit) || 1;
-
-    dbQuery.tags = req.body.tagName;
+    var string = req.body.tagName;  
+    dbQuery.question = new RegExp(string, 'i');
 
     Which.find(dbQuery)
       .limit(resultLimit)
